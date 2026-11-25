@@ -1,0 +1,65 @@
+:root {
+  --neo-canvas: #fafaf7;
+  --neo-surface: #ffffff;
+  --neo-ink: #040707;
+  --neo-text-muted: #5b6170;
+  --neo-surface-muted: #ededef;
+  --neo-primary: #dca027;
+  --neo-secondary: #1b2133;
+  --neo-secondary-foreground: #fafaf7;
+  --neo-accent: #e9aa21;
+  --neo-brand-ink: #040707;
+  --neo-border: #040707;
+  --neo-shadow-color: #040707;
+  --neo-focus: #1b2133;
+  --neo-link: #8a5a00;
+  --neo-success: #dcfce7;
+  --neo-success-ink: #166534;
+  --neo-warning: #fef3c7;
+  --neo-warning-ink: #92400e;
+  --neo-danger: #fee2e2;
+  --neo-danger-ink: #991b1b;
+  --neo-info: #dbeafe;
+  --neo-info-ink: #1e40af;
+  --neo-border-width: 2px;
+  --neo-radius: 4px;
+  --neo-shadow: 4px 4px 0 var(--neo-shadow-color);
+  --neo-shadow-compact: 2px 2px 0 var(--neo-shadow-color);
+  --neo-font-sans: ui-sans-serif, system-ui, sans-serif;
+  --neo-font-mono: ui-monospace, monospace;
+  --neo-weight-body: 400;
+  --neo-weight-control: 500;
+  --neo-weight-label: 600;
+  --neo-weight-heading: 700;
+  --neo-text-body: 16px;
+  --neo-text-control: 14px;
+  --neo-text-code: 13px;
+  --neo-text-heading: 28px;
+  --neo-text-display: clamp(36px, 6vw, 56px);
+  --neo-space-unit: 4px;
+  --neo-hover-offset: 1px;
+  --neo-press-offset: 4px;
+  --neo-motion-duration: 120ms;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --neo-canvas: #1b2133;
+    --neo-surface: #040707;
+    --neo-ink: #fafaf7;
+    --neo-text-muted: #d6d7da;
+    --neo-surface-muted: #4d5260;
+    --neo-border: #fafaf7;
+    --neo-shadow-color: #040707;
+    --neo-focus: #e4b557;
+    --neo-link: #e4b557;
+    --neo-success: #14532d;
+    --neo-success-ink: #dcfce7;
+    --neo-warning: #78350f;
+    --neo-warning-ink: #fef3c7;
+    --neo-danger: #7f1d1d;
+    --neo-danger-ink: #fee2e2;
+    --neo-info: #1e3a8a;
+    --neo-info-ink: #dbeafe;
+  }
+}
