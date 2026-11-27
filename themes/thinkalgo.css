@@ -1,0 +1,12 @@
+/*
+ * ThinkAlgo project detail palette
+ * Directly uses ThinkAlgo Brand Guideline tokens from neo-tokens.css:
+ * Navy (#1B2133), Gold (#DCA027), Warm White (#FAFAF7), Ink (#040707).
+ *
+ * To create a new project theme later, copy this file to themes/<slug>.css
+ * and override the --neo-* color tokens for both light and dark modes.
+ */
+
+:root {
+  --project-accent: var(--neo-primary);
+}

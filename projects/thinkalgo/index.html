@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ThinkAlgo · Hiếu Archive</title>
+  <meta name="description" content="ThinkAlgo — trung tâm dạy Toán tư duy và Lập trình thi đấu, cùng hệ thống 5 repo tôi tự viết để vận hành nó.">
+  <meta property="og:title" content="ThinkAlgo · Hiếu Archive">
+  <meta property="og:description" content="Trung tâm dạy Toán tư duy và Lập trình thi đấu, cùng LMS có máy chấm bài, xưởng tạo học liệu và lớp điều phối job tự viết.">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="vi_VN">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FAFAF7">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1B2133">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../neo-tokens.css">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../themes/thinkalgo.css">
+  <script src="../../arch.js" defer></script>
+</head>
+<body>
+<div class="root">
+  <a class="skip-link" href="#noi-dung">Bỏ qua tới nội dung</a>
+
+  <header class="header">
+    <nav class="nav" aria-label="Điều hướng dự án">
+      <a class="brand" href="../../"><span>Hiu<span class="brand-accent">laptop</span></span><span class="brand-label">Archive</span></a>
+      <div class="links">
+        <a class="nav-link nav-link-back" href="../../">← Trang chủ</a>
+        <a class="nav-link" href="#boi-canh">Bối cảnh</a>
+        <a class="nav-link" href="#kien-truc">Kiến trúc</a>
+        <a class="nav-link" href="#hanh-trinh">Hành trình</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="noi-dung" class="main" tabindex="-1">
+    <div class="project-topbar">
+      <a class="back-link" href="../../#da-lam">← Quay lại danh sách dự án</a>
+      <div class="palette-chip" title="Trang này dùng bảng màu riêng của ThinkAlgo theo Brand Guideline">
+        <span class="palette-dots" aria-hidden="true">
+          <i style="background: #1b2133;"></i>
+          <i style="background: #dca027;"></i>
+          <i style="background: #fafaf7;"></i>
+        </span>
+        <span>Bảng màu ThinkAlgo · Navy &amp; Vàng</span>
+      </div>
+    </div>
+
+    <!-- ===== Đầu trang: tóm tắt, vai trò, thời gian ===== -->
+    <section class="project-hero" aria-labelledby="thinkalgo-title">
+      <div class="project-hero-top">
+        <div class="project-hero-copy">
+          <div class="badge-row">
+            <span class="badge-year">08/2026 — nay</span>
+            <span class="badge-status"><span class="status-dot" aria-hidden="true"></span>Đang làm</span>
+            <span class="badge-tag">Toán tư duy</span>
+            <span class="badge-tag">Lập trình thi đấu</span>
+            <span class="badge-tag">5 repo</span>
+          </div>
+          <h1 id="thinkalgo-title" class="title">ThinkAlgo<span class="dot">.</span></h1>
+          <p class="intro">ThinkAlgo là trung tâm nhỏ của tôi, dạy Toán tư duy và Lập trình thi đấu. Tôi vừa đứng lớp, vừa tự viết phần mềm cho nó: một LMS có sẵn máy chấm bài, một xưởng tạo học liệu bằng agent, một lớp điều phối job dùng chung cho cả chấm bài lẫn tạo học liệu — và hạ tầng để tất cả chạy được trong tay một người.</p>
+        </div>
+        <div class="row">
+          <a class="button" href="https://lms.thinkcode.vn" rel="noopener" target="_blank">LMS ↗</a>
+        </div>
+      </div>
+
+      <dl class="facts-strip">
+        <div class="fact-cell">
+          <dt>Vai trò</dt>
+          <dd>Sáng lập · Giảng dạy · Viết toàn bộ hệ thống</dd>
+        </div>
+        <div class="fact-cell">
+          <dt>Thời gian</dt>
+          <dd>Từ 08/2026, vẫn đang làm</dd>
+        </div>
+        <div class="fact-cell">
+          <dt>Quy mô</dt>
+          <dd>5 repo · Next.js, Go, NATS, PostgreSQL</dd>
+        </div>
+        <div class="fact-cell">
+          <dt>Trang web</dt>
+          <dd>lms.thinkcode.vn</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- ===== 01 Bối cảnh ===== -->
+    <section id="boi-canh" class="section reveal" aria-labelledby="boi-canh-heading">
+      <header class="section-header">
+        <div class="section-header-main">
+          <span class="number">01</span>
+          <h2 id="boi-canh-heading" class="section-title">Một trung tâm cần những gì.</h2>
+        </div>
+      </header>
+      <div class="now-card">
+        <p class="now-text">Một lớp lập trình thi đấu không chỉ có giờ học. Học viên cần chỗ đọc bài, làm bài tập và một máy chấm trả kết quả ngay khi nộp code. Giáo viên cần đề bài, bộ test, lời giải và video bài giảng — rất nhiều học liệu. Còn trung tâm cần xếp lớp, theo dõi kết quả, thu học phí và cấp chứng chỉ.</p>
+        <p class="now-text" style="margin-top:16px">ThinkAlgo gom tất cả vào một hệ thống tôi hiểu từng dòng code: việc học và chấm bài nằm chung trong LMS, việc nặng thì đẩy ra worker qua một lớp điều phối, mỗi phần nói chuyện với nhau qua hợp đồng rõ ràng.</p>
+        <!-- Viết thêm: vì sao bạn mở trung tâm, vì sao chọn tự viết thay vì dùng dịch vụ có sẵn. -->
+      </div>
+    </section>
+
+    <!-- ===== 02 Các mảnh ghép ===== -->
+    <section id="tong-quan" class="section reveal" aria-labelledby="tong-quan-heading">
+      <header class="section-header">
+        <div class="section-header-main">
+          <span class="number">02</span>
+          <h2 id="tong-quan-heading" class="section-title">Ba mảnh ghép chính.</h2>
+        </div>
+      </header>
+
+      <ul class="pillars-grid">
+        <li class="card">
+          <span class="pillar-num">01 · HỌC &amp; CHẤM BÀI</span>
+          <h3 class="card-title">LMS có sẵn máy chấm</h3>
+          <p class="card-description">thinkalgo-lms là nơi học viên học và luyện: khóa học, lớp, bài học, bài tập, đề bài, contest, kết quả, học phí và chứng chỉ. Phần OJ nằm luôn trong LMS — khi học viên nộp code, LMS tạo job chấm và gửi đi qua coordinator.</p>
+        </li>
+        <li class="card">
+          <span class="pillar-num">02 · HỌC LIỆU</span>
+          <h3 class="card-title">Labs — xưởng tạo học liệu</h3>
+          <p class="card-description">thinkalgo-labs chạy workflow agent bằng Claude Agent SDK để soạn đề, bộ test, hình ảnh, video bài giảng và bài truyền thông, có bước người duyệt trước khi xuất bản.</p>
+        </li>
+        <li class="card">
+          <span class="pillar-num">03 · ĐIỀU PHỐI &amp; HẠ TẦNG</span>
+          <h3 class="card-title">Một lớp điều phối cho mọi việc nặng</h3>
+          <p class="card-description">thinkalgo-coordinator (Go) giao job cho worker — cả worker biên dịch, chấm bài lẫn worker của Labs. thinkalgo-nexus quản lý pool, worker và duyệt hợp đồng job. thinkalgo-station đóng gói tất cả bằng Docker Compose cùng runbook vận hành.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===== 03 Kiến trúc ===== -->
+    <section id="kien-truc" class="section reveal" aria-labelledby="kien-truc-heading">
+      <header class="section-header">
+        <div class="section-header-main">
+          <span class="number">03</span>
+          <h2 id="kien-truc-heading" class="section-title">Kiến trúc 5 repo.</h2>
+        </div>
+        <span class="section-meta">Sơ đồ tương tác · Có hiệu ứng dòng dữ liệu</span>
+      </header>
+
+      <article class="project-showcase" aria-label="Sơ đồ kiến trúc giao tiếp ThinkAlgo">
+        <div class="arch-block" data-arch-root>
+          <div class="arch-toolbar">
+            <div>
+              <p class="arch-kicker">KIẾN TRÚC GIAO TIẾP TOÀN HỆ THỐNG</p>
+              <p class="arch-hint">Chọn một luồng để xem đường đi tín hiệu, hoặc bấm trực tiếp vào từng repo trên sơ đồ.</p>
+            </div>
+            <div class="arch-controls">
+              <div class="arch-tabs" role="tablist" aria-label="Lọc luồng giao tiếp">
+                <button type="button" class="arch-tab" role="tab" aria-selected="true" data-flow="all">Toàn hệ thống</button>
+                <button type="button" class="arch-tab" role="tab" aria-selected="false" data-flow="learning">Học tập &amp; SSO</button>
+                <button type="button" class="arch-tab" role="tab" aria-selected="false" data-flow="judge">Chấm bài</button>
+                <button type="button" class="arch-tab" role="tab" aria-selected="false" data-flow="jobs">Tạo học liệu</button>
+              </div>
+              <button type="button" class="arch-toggle" data-arch-play aria-pressed="true" title="Bật hoặc tạm dừng hiệu ứng dòng dữ liệu">Tạm dừng</button>
+            </div>
+          </div>
+
+          <div class="arch-canvas-wrap">
+            <svg class="arch-svg" viewBox="0 0 1140 644" role="img" aria-label="Sơ đồ kiến trúc giao tiếp của 5 repo ThinkAlgo: thinkalgo-station, thinkalgo-lms, thinkalgo-labs, thinkalgo-nexus và thinkalgo-coordinator">
+              <defs>
+                <marker id="ah-ink" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+                  <path d="M0 0 L10 5 L0 10 Z" class="ah-fill-ink"/>
+                </marker>
+                <marker id="ah-gold" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+                  <path d="M0 0 L10 5 L0 10 Z" class="ah-fill-gold"/>
+                </marker>
+              </defs>
+
+              <!-- Station: ranh giới hạ tầng -->
+              <rect class="svg-station-frame" x="24" y="132" width="796" height="490" rx="4"/>
+              <g class="svg-node svg-repo" data-repo="station" data-flows="all learning judge jobs" tabindex="0" role="button" aria-label="thinkalgo-station: Hạ tầng tự vận hành Docker Compose">
+                <rect class="svg-pill" x="40" y="118" width="242" height="28" rx="3"/>
+                <text class="svg-mono-bold" x="161" y="136" text-anchor="middle">thinkalgo-station · Compose</text>
+              </g>
+
+              <text class="svg-caption" x="856" y="126">NGOÀI STATION · LƯU TRỮ</text>
+
+              <g class="svg-legend" aria-hidden="true">
+                <rect class="svg-legend-box" x="856" y="168" width="244" height="62" rx="4"/>
+                <line x1="870" y1="188" x2="900" y2="188" class="svg-legend-solid"/>
+                <text class="svg-sm" x="910" y="192">Luồng chính / Job</text>
+                <line x1="870" y1="210" x2="900" y2="210" class="svg-legend-dashed"/>
+                <text class="svg-sm" x="910" y="214">Điều khiển / SSO / Lưu trữ</text>
+              </g>
+
+              <!-- EDGES -->
+              <g class="svg-edges">
+                <path id="e-user-tunnel" class="svg-edge" data-flows="all learning judge" data-repos="station lms" data-speed="0.8" data-packets="1" d="M 268 51 H 310" marker-end="url(#ah-ink)"/>
+                <text class="svg-edge-lbl" data-for="e-user-tunnel" x="289" y="42" text-anchor="middle">HTTPS</text>
+
+                <path id="e-tunnel-lms" class="svg-edge" data-flows="all learning judge" data-repos="lms station" data-speed="0.7" data-packets="1" d="M 420 82 V 168" marker-end="url(#ah-ink)"/>
+                <text class="svg-edge-lbl" data-for="e-tunnel-lms" x="428" y="135">web</text>
+
+                <path id="e-tunnel-nexus" class="svg-edge svg-edge-ctrl" data-flows="all learning" data-repos="nexus station" data-speed="0.55" data-packets="1" d="M 420 82 V 100 H 636 V 168" marker-end="url(#ah-ink)"/>
+
+                <path id="e-tunnel-labs" class="svg-edge svg-edge-ctrl" data-flows="all jobs" data-repos="labs station" data-speed="0.55" data-packets="1" d="M 420 82 V 100 H 158 V 168" marker-end="url(#ah-ink)"/>
+
+                <path id="e-kc-nexus" class="svg-edge svg-edge-ctrl" data-flows="all learning" data-repos="nexus station" data-speed="0.65" data-packets="1" d="M 712 82 V 168" marker-end="url(#ah-ink)"/>
+                <text class="svg-edge-lbl" data-for="e-kc-nexus" x="720" y="135">OIDC</text>
+
+                <path id="e-kc-lms" class="svg-edge svg-edge-ctrl" data-flows="all learning" data-repos="lms station" data-speed="0.6" data-packets="1" d="M 610 82 V 120 H 490 V 168" marker-end="url(#ah-ink)"/>
+                <text class="svg-edge-lbl" data-for="e-kc-lms" x="550" y="115" text-anchor="middle">SSO</text>
+
+                <!-- Labs <-> NATS -->
+                <path id="e-labs-nats" class="svg-edge" data-flows="all jobs" data-repos="labs station" data-speed="0.85" data-packets="1" d="M 100 250 V 318" marker-end="url(#ah-ink)"/>
+                <text class="svg-edge-lbl" data-for="e-labs-nats" x="93" y="288" text-anchor="end">JOBS</text>
+                <path id="e-nats-labs" class="svg-edge" data-flows="all jobs" data-repos="labs station" data-speed="0.85" data-packets="1" d="M 190 318 V 250" marker-end="url(#ah-ink)"/>
+                <text class="svg-edge-lbl" data-for="e-nats-labs" x="198" y="288">RESULTS</text>
+
+                <!-- LMS <-> NATS: bài nộp -->
+                <path id="e-lms-nats" class="svg-edge" data-flows="all judge" data-repos="lms station" data-speed="0.9" data-packets="1" d="M 330 250 V 318" marker-end="url(#ah-ink)"/>
+                <text class="svg-edge-lbl" data-for="e-lms-nats" x="322" y="288" text-anchor="end">bài nộp</text>
+                <path id="e-nats-lms" class="svg-edge" data-flows="all judge" data-repos="lms station" data-speed="0.9" data-packets="1" d="M 380 318 V 250" marker-end="url(#ah-ink)"/>
+                <text class="svg-edge-lbl" data-for="e-nats-lms" x="388" y="288">verdict</text>
+
+                <!-- NATS <-> Coordinator -->
+                <path id="e-nats-coord" class="svg-edge" data-flows="all judge jobs" data-repos="coordinator station" data-speed="0.9" data-packets="1" d="M 400 340 H 440" marker-end="url(#ah-ink)"/>
+                <path id="e-coord-nats" class="svg-edge" data-flows="all judge jobs" data-repos="coordinator station" data-speed="0.9" data-packets="1" d="M 440 380 H 400" marker-end="url(#ah-ink)"/>
+
+                <!-- Nexus -> Coordinator -->
+                <path id="e-nexus-coord" class="svg-edge svg-edge-ctrl" data-flows="all judge jobs" data-repos="nexus coordinator" data-speed="0.65" data-packets="1" d="M 664 250 V 318" marker-end="url(#ah-ink)"/>
+                <text class="svg-edge-lbl" data-for="e-nexus-coord" x="656" y="288" text-anchor="end">registry snapshot</text>
+
+                <!-- Coordinator -> workers -->
+                <path id="e-coord-labsw" class="svg-edge" data-flows="all jobs" data-repos="coordinator labs" data-speed="0.8" data-packets="1" d="M 460 402 V 436 H 158 V 470" marker-end="url(#ah-ink)"/>
+                <text class="svg-edge-lbl" data-for="e-coord-labsw" x="300" y="428" text-anchor="middle">dispatch.&lt;pool&gt;.&lt;id&gt;</text>
+                <path id="e-coord-judge" class="svg-edge" data-flows="all judge" data-repos="coordinator lms" data-speed="0.95" data-packets="2" d="M 490 402 V 470" marker-end="url(#ah-ink)"/>
+
+                <!-- Workers -> NATS: kết quả & heartbeat -->
+                <path id="e-labsw-nats" class="svg-edge" data-flows="all jobs" data-repos="labs coordinator station" data-speed="0.85" data-packets="1" d="M 80 470 V 402" marker-end="url(#ah-ink)"/>
+                <text class="svg-edge-lbl" data-for="e-labsw-nats" x="88" y="452">hb 5s</text>
+                <path id="e-judge-nats" class="svg-edge" data-flows="all judge" data-repos="lms coordinator station" data-speed="0.85" data-packets="1" d="M 340 470 V 402" marker-end="url(#ah-ink)"/>
+                <text class="svg-edge-lbl" data-for="e-judge-nats" x="348" y="460">kết quả · hb</text>
+
+                <!-- Coordinator -> Postgres -->
+                <path id="e-coord-pg" class="svg-edge svg-edge-ctrl" data-flows="all judge jobs" data-repos="coordinator station" data-speed="0.6" data-packets="1" d="M 700 402 V 470" marker-end="url(#ah-ink)"/>
+                <text class="svg-edge-lbl" data-for="e-coord-pg" x="708" y="440">jobs · lease</text>
+
+                <!-- Workers -> Nexus -->
+                <path id="e-workers-nexus" class="svg-edge svg-edge-ctrl" data-flows="all judge jobs" data-repos="labs lms nexus" data-speed="0.45" data-packets="1" d="M 200 554 V 578 H 790 V 250" marker-end="url(#ah-ink)"/>
+                <text class="svg-edge-lbl" data-for="e-workers-nexus" x="560" y="572" text-anchor="middle">mọi worker: enroll (1 lần) · heartbeat 10s</text>
+
+                <!-- R2 -->
+                <path id="e-labsw-r2" class="svg-edge svg-edge-ctrl" data-flows="all jobs" data-repos="labs" data-speed="0.42" data-packets="1" d="M 120 554 V 610 H 1000 V 554" marker-end="url(#ah-ink)"/>
+                <text class="svg-edge-lbl" data-for="e-labsw-r2" x="600" y="630" text-anchor="middle">Labs tải artifact &amp; video lên R2</text>
+                <path id="e-r2-judge" class="svg-edge svg-edge-ctrl" data-flows="all judge" data-repos="lms" data-speed="0.5" data-packets="1" d="M 940 554 V 594 H 440 V 554" marker-end="url(#ah-ink)"/>
+                <text class="svg-edge-lbl" data-for="e-r2-judge" x="930" y="588" text-anchor="end">bộ test</text>
+              </g>
+
+              <!-- NODES -->
+              <g class="svg-nodes">
+                <g class="svg-node" data-node="users" data-flows="all learning judge">
+                  <rect class="svg-box svg-box-soft" x="48" y="20" width="220" height="62" rx="4"/>
+                  <text class="svg-title" x="158" y="46" text-anchor="middle">Người dùng</text>
+                  <text class="svg-sm" x="158" y="65" text-anchor="middle">Học viên · Giáo viên · Quản lý</text>
+                </g>
+
+                <g class="svg-node" data-node="tunnel" data-repo="station" data-flows="all learning judge jobs" tabindex="0" role="button" aria-label="Cloudflare Tunnel trong thinkalgo-station">
+                  <rect class="svg-box svg-box-soft" x="310" y="20" width="220" height="62" rx="4"/>
+                  <text class="svg-title" x="420" y="46" text-anchor="middle">Cloudflare Tunnel</text>
+                  <text class="svg-mono" x="420" y="65" text-anchor="middle">cloudflared · HTTPS Ingress</text>
+                </g>
+
+                <g class="svg-node" data-node="keycloak" data-repo="station" data-flows="all learning" tabindex="0" role="button" aria-label="Keycloak SSO trong thinkalgo-station">
+                  <rect class="svg-box svg-box-soft" x="572" y="20" width="220" height="62" rx="4"/>
+                  <text class="svg-title" x="682" y="46" text-anchor="middle">Keycloak SSO</text>
+                  <text class="svg-mono" x="682" y="65" text-anchor="middle">OIDC · Danh tính dùng chung</text>
+                </g>
+
+                <g class="svg-node svg-repo" data-node="labs" data-repo="labs" data-flows="all jobs" tabindex="0" role="button" aria-label="thinkalgo-labs: Workflow agent tạo học liệu">
+                  <rect class="svg-box" x="48" y="168" width="220" height="82" rx="4"/>
+                  <text class="svg-title" x="158" y="196" text-anchor="middle">thinkalgo-labs</text>
+                  <text class="svg-sm" x="158" y="216" text-anchor="middle">Agent tạo đề, test &amp; video</text>
+                  <text class="svg-mono" x="158" y="235" text-anchor="middle">web · bridge · outbox/inbox</text>
+                </g>
+
+                <g class="svg-node svg-repo svg-focus" data-node="lms" data-repo="lms" data-flows="all learning judge" tabindex="0" role="button" aria-label="thinkalgo-lms: Nền tảng học tập kèm máy chấm bài">
+                  <rect class="svg-box svg-box-gold" x="310" y="168" width="220" height="82" rx="4"/>
+                  <text class="svg-title svg-gold-ink" x="420" y="196" text-anchor="middle">thinkalgo-lms</text>
+                  <text class="svg-sm svg-gold-ink" x="420" y="216" text-anchor="middle">Học tập · OJ · Contest</text>
+                  <text class="svg-mono svg-gold-ink" x="420" y="235" text-anchor="middle">lms.thinkcode.vn</text>
+                </g>
+
+                <g class="svg-node svg-repo" data-node="nexus" data-repo="nexus" data-flows="all learning judge jobs" tabindex="0" role="button" aria-label="thinkalgo-nexus: Trang quản trị pool, worker và hợp đồng job">
+                  <rect class="svg-box" x="572" y="168" width="220" height="82" rx="4"/>
+                  <text class="svg-title" x="682" y="196" text-anchor="middle">thinkalgo-nexus</text>
+                  <text class="svg-sm" x="682" y="216" text-anchor="middle">Admin · Pool · Duyệt hợp đồng</text>
+                  <text class="svg-mono" x="682" y="235" text-anchor="middle">Control Plane · Registry</text>
+                </g>
+
+                <g class="svg-node" data-node="nats" data-repo="station" data-flows="all judge jobs" tabindex="0" role="button" aria-label="NATS JetStream trong thinkalgo-station">
+                  <rect class="svg-box svg-box-soft" x="48" y="318" width="352" height="84" rx="4"/>
+                  <text class="svg-title" x="224" y="347" text-anchor="middle">NATS JetStream</text>
+                  <text class="svg-sm" x="224" y="367" text-anchor="middle">Hàng đợi bền · Pub/Sub</text>
+                  <text class="svg-mono" x="224" y="386" text-anchor="middle">JOBS · WORKER_EVENTS · RESULTS</text>
+                </g>
+
+                <g class="svg-node svg-repo" data-node="coordinator" data-repo="coordinator" data-flows="all judge jobs" tabindex="0" role="button" aria-label="thinkalgo-coordinator: Lớp điều phối job viết bằng Go">
+                  <rect class="svg-box" x="440" y="318" width="308" height="84" rx="4"/>
+                  <text class="svg-title" x="594" y="347" text-anchor="middle">thinkalgo-coordinator</text>
+                  <text class="svg-sm" x="594" y="367" text-anchor="middle">Chọn pool &amp; worker · Lease &amp; Fence</text>
+                  <text class="svg-mono" x="594" y="386" text-anchor="middle">Go · Push dispatch · Không chạy job</text>
+                </g>
+
+                <g class="svg-node" data-node="workers" data-repo="labs" data-flows="all jobs" tabindex="0" role="button" aria-label="Worker của thinkalgo-labs">
+                  <rect class="svg-box" x="48" y="470" width="220" height="84" rx="4"/>
+                  <text class="svg-title" x="158" y="499" text-anchor="middle">Labs Workers</text>
+                  <text class="svg-sm" x="158" y="519" text-anchor="middle">Pool đa VPS · Spool đĩa</text>
+                  <text class="svg-mono" x="158" y="538" text-anchor="middle">Agent SDK · FFmpeg · Chromium</text>
+                </g>
+
+                <g class="svg-node" data-node="judges" data-flows="all judge">
+                  <rect class="svg-box" x="300" y="470" width="220" height="84" rx="4"/>
+                  <text class="svg-title" x="410" y="499" text-anchor="middle">Judge Workers</text>
+                  <text class="svg-sm" x="410" y="519" text-anchor="middle">Biên dịch &amp; chấm bài</text>
+                  <text class="svg-mono" x="410" y="538" text-anchor="middle">pool judge · sandbox</text>
+                </g>
+
+                <g class="svg-node" data-node="postgres" data-repo="station" data-flows="all learning judge jobs" tabindex="0" role="button" aria-label="PostgreSQL lõi trong thinkalgo-station">
+                  <rect class="svg-box svg-box-soft" x="552" y="470" width="220" height="84" rx="4"/>
+                  <text class="svg-title" x="662" y="499" text-anchor="middle">PostgreSQL</text>
+                  <text class="svg-sm" x="662" y="519" text-anchor="middle">Mỗi dịch vụ một DB &amp; role</text>
+                  <text class="svg-mono" x="662" y="538" text-anchor="middle">LMS · Nexus · Labs · Coord · KC</text>
+                </g>
+
+                <g class="svg-node" data-node="r2" data-flows="all judge jobs">
+                  <rect class="svg-box svg-box-soft" x="856" y="470" width="244" height="84" rx="4"/>
+                  <text class="svg-title" x="978" y="499" text-anchor="middle">Cloudflare R2</text>
+                  <text class="svg-sm" x="978" y="519" text-anchor="middle">Lưu trữ file lớn &amp; CDN</text>
+                  <text class="svg-mono" x="978" y="538" text-anchor="middle">Bộ test · Video · Artifact</text>
+                </g>
+              </g>
+
+              <g class="svg-packets" data-arch-packets aria-hidden="true"></g>
+            </svg>
+          </div>
+
+          <div class="arch-inspector" data-arch-inspector aria-live="polite">
+            <div class="arch-inspector-head">
+              <span class="arch-inspector-badge" data-inspector-badge>TOÀN HỆ THỐNG</span>
+              <strong class="arch-inspector-title" data-inspector-title>5 repo, một lớp điều phối dùng chung</strong>
+              <button type="button" class="arch-reset" data-arch-reset hidden>Xem lại tổng quan</button>
+            </div>
+            <p class="arch-inspector-body" data-inspector-body>Học viên học và nộp bài trên LMS. Mọi việc nặng — biên dịch, chấm bài, tạo học liệu — đều thành job đi qua NATS và Coordinator tới đúng pool worker. Nexus quyết định worker nào và loại job nào được phép chạy; Station dựng tất cả.</p>
+            <p class="arch-inspector-comm" data-inspector-comm></p>
+          </div>
+
+          <div class="repo-strip" role="group" aria-label="Danh sách 5 repo trong hệ thống ThinkAlgo">
+            <button type="button" class="repo-pill" data-repo-pill="lms"><code>thinkalgo-lms</code><span>Học tập &amp; OJ</span></button>
+            <button type="button" class="repo-pill" data-repo-pill="labs"><code>thinkalgo-labs</code><span>Học liệu</span></button>
+            <button type="button" class="repo-pill" data-repo-pill="coordinator"><code>thinkalgo-coordinator</code><span>Điều phối job</span></button>
+            <button type="button" class="repo-pill" data-repo-pill="nexus"><code>thinkalgo-nexus</code><span>Quản trị</span></button>
+            <button type="button" class="repo-pill" data-repo-pill="station"><code>thinkalgo-station</code><span>Hạ tầng</span></button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ===== 04 Hành trình ===== -->
+    <section id="hanh-trinh" class="section reveal" aria-labelledby="hanh-trinh-heading">
+      <header class="section-header">
+        <div class="section-header-main">
+          <span class="number">04</span>
+          <h2 id="hanh-trinh-heading" class="section-title">Hành trình.</h2>
+        </div>
+        <span class="section-meta">Theo lịch sử commit</span>
+      </header>
+      <ul class="pillars-grid">
+        <li class="card">
+          <span class="pillar-num">08 / 2026</span>
+          <h3 class="card-title">Bắt đầu từ máy chấm</h3>
+          <p class="card-description">Fork VNOJ / DMOJ, đóng gói Docker, tự build và deploy qua GitHub Actions để có ngay chỗ cho học viên nộp bài. Đây là nền móng cho phần chấm bài, nay được đưa vào trong LMS.</p>
+        </li>
+        <li class="card">
+          <span class="pillar-num">03 / 11 / 2026</span>
+          <h3 class="card-title">Thử quản lý trên Odoo — rồi bỏ</h3>
+          <p class="card-description">Viết module Odoo 20 cho tuyển sinh, lớp, điểm danh, học phí, lương. Sau đó quyết định cắt Odoo khỏi hệ thống: lớp học, học phí và chứng chỉ chuyển về LMS.</p>
+        </li>
+        <li class="card">
+          <span class="pillar-num">11 / 11 / 2026</span>
+          <h3 class="card-title">Labs — xưởng tạo học liệu</h3>
+          <p class="card-description">Bắt đầu nền tảng chạy workflow agent bằng Claude Agent SDK để sinh đề, bộ test, hình ảnh và video bài giảng, có bước người duyệt trước khi xuất bản.</p>
+        </li>
+        <li class="card">
+          <span class="pillar-num">23 / 11 / 2026</span>
+          <h3 class="card-title">Tách thành các repo</h3>
+          <p class="card-description">LMS, Nexus, Coordinator và Station ra đời cùng ngày, mỗi repo một trách nhiệm. Hệ thống có hình dạng như sơ đồ phía trên.</p>
+        </li>
+        <li class="card">
+          <span class="pillar-num">26 / 11 / 2026</span>
+          <h3 class="card-title">Luồng điều phối chạy thật</h3>
+          <p class="card-description">Chạy thử trọn vòng trên một stack tách biệt: Nexus duyệt hợp đồng, Coordinator giao job, worker Labs nhận việc và trả kết quả về. Kiểm luôn các ca xấu: hợp đồng chưa duyệt, worker giả.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===== 05 Chỗ phải nghĩ kỹ ===== -->
+    <section id="cho-kho" class="section reveal" aria-labelledby="cho-kho-heading">
+      <header class="section-header">
+        <div class="section-header-main">
+          <span class="number">05</span>
+          <h2 id="cho-kho-heading" class="section-title">Những chỗ phải nghĩ kỹ.</h2>
+        </div>
+      </header>
+      <ul class="pillars-grid">
+        <li class="card">
+          <span class="pillar-num">MỘT LỚP CHO NHIỀU LOẠI VIỆC</span>
+          <h3 class="card-title">Chấm bài và tạo học liệu đi chung đường</h3>
+          <p class="card-description">Coordinator không biết gì về LMS hay Labs, chỉ biết hợp đồng job. Mỗi loại việc khai báo <code>type@version</code>, được duyệt trên Nexus và ghim bằng digest. Thêm một loại worker mới không phải sửa coordinator.</p>
+        </li>
+        <li class="card">
+          <span class="pillar-num">KHÔNG CHẠY TRÙNG</span>
+          <h3 class="card-title">Mỗi job chỉ một lượt chạy</h3>
+          <p class="card-description">Coordinator chỉ điều phối, không tự chạy job. Mỗi lần giao có lease 30 giây, worker gửi heartbeat 5 giây; cơ sở dữ liệu chỉ cho một attempt hoạt động mỗi job. Lease hết hạn thì báo <code>interrupted</code> và ghi vào hàng lỗi để người xem lại.</p>
+        </li>
+        <li class="card">
+          <span class="pillar-num">KHÔNG WORKER VÔ DANH</span>
+          <h3 class="card-title">Worker nào cũng phải được cấp danh tính</h3>
+          <p class="card-description">Mọi worker thuộc đúng một pool và đăng ký qua token một lần do Nexus cấp. Coordinator chỉ giao việc cho worker có trong snapshot registry. Worker chỉ kết nối ra ngoài tới NATS, viết bằng ngôn ngữ nào cũng được nhờ giao thức và bộ kiểm tra tương thích.</p>
+        </li>
+        <li class="card">
+          <span class="pillar-num">MỘT NGƯỜI VẬN HÀNH</span>
+          <h3 class="card-title">Hạ tầng phải đọc là hiểu</h3>
+          <p class="card-description">Station gom Docker Compose cho dev và cho VPS cùng runbook dựng lại từ đầu, không chứa secret, không có script ma thuật. Mỗi dịch vụ một database và role riêng; đăng nhập dùng chung qua Keycloak.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===== 06 Đang ở đâu ===== -->
+    <section id="trang-thai" class="section reveal" aria-labelledby="trang-thai-heading">
+      <header class="section-header">
+        <div class="section-header-main">
+          <span class="number">06</span>
+          <h2 id="trang-thai-heading" class="section-title">Đang ở đâu.</h2>
+        </div>
+        <span class="section-meta">Cập nhật 27/11/2026</span>
+      </header>
+      <ul class="pillars-grid">
+        <li class="card">
+          <span class="pillar-num">ĐÃ CÓ</span>
+          <h3 class="card-title">LMS</h3>
+          <p class="card-description">Trang học, lớp, bài học, bài tập, kết quả, học phí và chứng chỉ, hiển thị theo quyền. Phía OJ đã có đề, danh mục đề, gói đề riêng tư, tổ chức và contest.</p>
+        </li>
+        <li class="card">
+          <span class="pillar-num">ĐANG LÀM</span>
+          <h3 class="card-title">Nộp code và chấm bài</h3>
+          <p class="card-description">Còn thiếu: nộp mã nguồn, worker biên dịch và chấm, verdict, bảng xếp hạng. Phía LMS còn soạn và xuất bản bài, ghi danh, thu học phí, cấp chứng chỉ PDF.</p>
+        </li>
+        <li class="card">
+          <span class="pillar-num">MVP</span>
+          <h3 class="card-title">Coordinator, Nexus, Labs</h3>
+          <p class="card-description">Coordinator đã có hàng đợi job, hàng đợi kết quả và giao việc qua NATS JetStream. Nexus có module đầu tiên: pool, worker, heartbeat, nhật ký. Labs là loại worker đầu tiên chạy qua luồng này.</p>
+        </li>
+      </ul>
+      <!--
+        Phần 07 — "Học được gì": vài dòng tự nhìn lại của bạn. Khi viết xong, thêm một section
+        giống các section trên với id="hoc-duoc" và số 07.
+      -->
+    </section>
+
+    <nav class="project-bottom-nav" aria-label="Điều hướng cuối trang">
+      <a class="back-link" href="../../">← Về trang chủ</a>
+      <div class="row">
+        <a class="button" href="https://lms.thinkcode.vn" rel="noopener" target="_blank">ThinkAlgo LMS ↗</a>
+      </div>
+    </nav>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-brand">© Hiếu · hiulaptop.me</span>
+      <span class="footer-note">ThinkAlgo · Thiết kế theo <a class="footer-link" href="https://lms.thinkcode.vn/brand-guideline" rel="noopener" target="_blank">ThinkAlgo Brand Guideline</a></span>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

@@ -3,150 +3,169 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- DRAFT: name, role and description are placeholders; replace with your own words. -->
-  <title>Hiếu · Full-stack developer</title>
-  <meta name="description" content="Tôi xây nền tảng học thuật toán ThinkAlgo: từ hệ thống học, chấm bài đến hạ tầng tự vận hành.">
-  <meta property="og:title" content="Hiếu · Full-stack developer">
-  <meta property="og:description" content="Tôi xây nền tảng học thuật toán ThinkAlgo: từ hệ thống học, chấm bài đến hạ tầng tự vận hành.">
+  <title>Hiếu · Lưu trữ những gì đã làm</title>
+  <meta name="description" content="Cuốn sổ lưu lại những sản phẩm, hệ thống và việc tôi đã làm — không gắn vào một ngành cụ thể nào.">
+  <meta property="og:title" content="Hiếu · Lưu trữ những gì đã làm">
+  <meta property="og:description" content="Cuốn sổ lưu lại những sản phẩm và hệ thống tôi đã làm.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="vi_VN">
-  <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FAFAF7">
-  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1B2133">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f6f4ee">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="neo-tokens.css">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Patrick+Hand&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/home.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="assets/home.js" defer></script>
 </head>
 <body>
-<div class="root">
   <a class="skip-link" href="#noi-dung">Bỏ qua tới nội dung</a>
+  <div class="progress" aria-hidden="true"></div>
 
-  <header class="header">
-    <nav class="nav" aria-label="Mục chính">
-      <a class="brand" href="#"><span>Hiu<span class="brand-accent">laptop</span></span><span class="brand-label">Portfolio</span></a>
-      <div class="links">
-        <a class="nav-link" href="#du-an">Dự án</a>
-        <a class="nav-link" href="#ky-nang">Kỹ năng</a>
-        <a class="nav-link" href="#kinh-nghiem">Kinh nghiệm</a>
-        <a class="nav-link" href="#lien-he">Liên hệ</a>
-      </div>
+  <header class="nav" data-nav>
+    <a class="brand" href="./" aria-label="Trang chủ Hiulaptop">
+      <span class="brand-sticker">Hiu<b>laptop</b></span>
+    </a>
+    <nav class="tabs" aria-label="Mục chính">
+      <a href="#ve-toi" style="--tab:var(--lime)">Về tôi</a>
+      <a href="#hien-tai" style="--tab:var(--sky)">Hiện tại</a>
+      <a href="#da-lam" style="--tab:var(--pink)">Đã làm</a>
+      <a href="#lien-ket" style="--tab:var(--paper)">Liên kết</a>
     </nav>
   </header>
 
-  <main id="noi-dung" class="main" tabindex="-1">
-    <div class="hero">
-      <div>
-        <p class="eyebrow">FULL-STACK DEVELOPER / PORTFOLIO</p>
-        <h1 class="title">Xin chào, tôi là Hiếu<span class="dot">.</span></h1>
-        <p class="intro">Tôi xây nền tảng học thuật toán ThinkAlgo: từ hệ thống học, chấm bài đến hạ tầng tự vận hành.</p>
-        <div class="row">
-          <a class="button" href="#du-an">Xem dự án</a>
-          <!-- DRAFT: add your public email: <a class="button" data-variant="outline" href="mailto:you@example.com">Gửi email</a> -->
-          <a class="button" data-variant="outline" href="https://github.com/Hiulaptop" rel="noopener" target="_blank">GitHub ↗</a>
-          <a class="button" data-variant="outline" href="https://lms.thinkcode.vn" rel="noopener" target="_blank">ThinkCode ↗</a>
-        </div>
-        <p class="meta">VIỆT NAM · HTML · CSS</p>
+  <main id="noi-dung" tabindex="-1">
+    <!-- ========== HERO ========== -->
+    <section class="hero" aria-label="Giới thiệu">
+      <div class="hero-photo">
+        <figure class="polaroid stick" style="--r:-5deg">
+          <span class="tape tape-top" aria-hidden="true"></span>
+          <div class="photo">
+            <!-- Đặt ảnh của bạn tại assets/portrait.jpg (vuông hoặc 4:5) -->
+            <img src="assets/portrait.jpg" alt="Ảnh chân dung của Hiếu" width="800" height="800" data-portrait>
+            <div class="photo-fallback" aria-hidden="true"><span>H</span></div>
+          </div>
+          <figcaption class="hand">Hiếu, 2026 ♡</figcaption>
+        </figure>
+        <span class="sticker sticker-lime wiggle" style="--r:-12deg" aria-hidden="true">đang<br>làm!</span>
+        <span class="sticker sticker-pink wiggle" style="--r:8deg;--delay:-1.2s" aria-hidden="true">★</span>
+        <svg class="doodle doodle-arrow" viewBox="0 0 120 80" aria-hidden="true"><path d="M110 10 C 80 5, 40 20, 20 60 M20 60 L 14 42 M20 60 L 36 52" /></svg>
       </div>
-      <aside class="hero-sample" aria-label="Dự án nổi bật">
-        <p class="micro">ĐANG LÀM / THINKALGO</p>
-        <div class="card">
-          <h2 class="card-title">ThinkAlgo</h2>
-          <p class="card-description">Một nền tảng học thuật toán: hệ thống học, chấm bài, môi trường thực hành và hạ tầng tự vận hành.</p>
+
+      <div class="hero-text">
+        <p class="hand hello intro-in" style="--d:1">xin chào 👋</p>
+        <h1 class="hero-title intro-in" style="--d:2">Tôi là <span class="hl hl-lime is-on">Hiếu</span>.</h1>
+        <p class="hero-rotator intro-in" style="--d:3">
+          Tôi dựng <span class="rotator" data-rotator data-words="sản phẩm|hệ thống|lớp học|công cụ|những thứ mình cần">sản phẩm</span><span class="caret" aria-hidden="true"></span>
+        </p>
+        <p class="hero-lead intro-in" style="--d:4">
+          Đây là cuốn sổ tôi lưu lại những gì mình đã làm — không viết riêng cho ngành hay chức danh nào. Mỗi dự án được dán vào đây và mở sang một trang riêng.
+        </p>
+        <div class="hero-cta intro-in" style="--d:5">
+          <a class="btn btn-ink" href="#da-lam">Lật tới phần đã làm ↓</a>
+          <a class="btn btn-paper" href="https://github.com/Hiulaptop" rel="noopener" target="_blank">GitHub ↗</a>
         </div>
-        <div class="sample-strip" aria-hidden="true"><span>Next.js</span><span>Go</span><span>PostgreSQL</span><span>Keycloak</span></div>
-      </aside>
+      </div>
+    </section>
+
+    <!-- ========== WASHI TAPE ========== -->
+    <div class="washi" aria-hidden="true">
+      <div class="washi-track">
+        <span>giáo dục</span><i>✿</i><span>lập trình thi đấu</span><i>✿</i><span>hệ thống tự dựng</span><i>✿</i><span>máy chấm bài</span><i>✿</i><span>LMS</span><i>✿</i><span>agent tạo học liệu</span><i>✿</i><span>vận hành lớp học</span><i>✿</i>
+        <span>giáo dục</span><i>✿</i><span>lập trình thi đấu</span><i>✿</i><span>hệ thống tự dựng</span><i>✿</i><span>máy chấm bài</span><i>✿</i><span>LMS</span><i>✿</i><span>agent tạo học liệu</span><i>✿</i><span>vận hành lớp học</span><i>✿</i>
+      </div>
     </div>
 
-    <nav class="toc" aria-label="Mục lục">
-      <a href="#du-an"><span>01</span>Dự án</a>
-      <a href="#ky-nang"><span>02</span>Kỹ năng</a>
-      <a href="#kinh-nghiem"><span>03</span>Kinh nghiệm</a>
-      <a href="#lien-he"><span>04</span>Liên hệ</a>
-    </nav>
-
-    <section id="du-an" class="section" aria-labelledby="du-an-heading">
-      <header class="section-header"><span class="number">01</span><h2 id="du-an-heading" class="section-title">Dự án.</h2></header>
-      <ul class="grid">
-        <li class="card">
-          <h3 class="card-title">ThinkAlgo LMS</h3>
-          <p class="card-description">Trang học thuật toán: khóa học, bài tập, tổ chức và cuộc thi. Đăng nhập qua Keycloak, render phía server.</p>
-          <ul class="tags" aria-label="Công nghệ"><li>Next.js</li><li>PostgreSQL</li><li>Keycloak</li></ul>
-          <a class="card-link" href="https://lms.thinkcode.vn" rel="noopener" target="_blank">Xem trang ↗</a>
-        </li>
-        <li class="card">
-          <h3 class="card-title">ThinkAlgo Admin</h3>
-          <p class="card-description">Bảng quản trị nền tảng: phát hành, quyền và cấu hình cho toàn hệ thống.</p>
-          <ul class="tags" aria-label="Công nghệ"><li>Next.js</li><li>PostgreSQL</li><li>OIDC</li></ul>
-        </li>
-        <li class="card">
-          <h3 class="card-title">ThinkAlgo Labs</h3>
-          <p class="card-description">Môi trường thực hành có AI hỗ trợ, worker chạy mã tách biệt, điều phối qua NATS.</p>
-          <ul class="tags" aria-label="Công nghệ"><li>Next.js</li><li>Claude Agent SDK</li><li>NATS</li></ul>
-        </li>
-        <li class="card">
-          <h3 class="card-title">Coordinator</h3>
-          <p class="card-description">Dịch vụ Go điều phối worker chấm bài và hàng đợi công việc.</p>
-          <ul class="tags" aria-label="Công nghệ"><li>Go</li><li>NATS</li><li>PostgreSQL</li></ul>
-        </li>
-        <li class="card">
-          <h3 class="card-title">Station</h3>
-          <p class="card-description">Hạ tầng tự vận hành bằng Docker Compose và Cloudflare Tunnel, runbook dựng lại từ đầu.</p>
-          <ul class="tags" aria-label="Công nghệ"><li>Docker</li><li>Cloudflare</li><li>Keycloak</li></ul>
-        </li>
-      </ul>
+    <!-- ========== VỀ TÔI ========== -->
+    <section id="ve-toi" class="section" aria-labelledby="ve-toi-h">
+      <header class="sec-head stick" style="--r:-1.5deg">
+        <span class="sec-num">01</span>
+        <h2 id="ve-toi-h" class="hand">Về tôi</h2>
+      </header>
+      <div class="ruled stick" style="--r:.6deg">
+        <span class="tape tape-corner" aria-hidden="true"></span>
+        <p>Tôi thích tự tay dựng những thứ mình cần — từ một công cụ nhỏ cho tới cả <span class="hl hl-sky">một hệ thống</span> phục vụ người khác dùng mỗi ngày.</p>
+        <p>Hiện tôi vừa <span class="hl hl-pink">đi dạy lập trình thi đấu</span>, vừa vận hành một startup giáo dục nhỏ và tự viết phần mềm cho chính nó.</p>
+        <p>Trang này không phải CV. Nó là chỗ tôi lưu lại những gì đã làm, để sau này nhìn lại.</p>
+        <!-- Viết thêm câu chuyện của bạn ở đây: bắt đầu từ đâu, thích gì, làm việc thế nào. -->
+      </div>
     </section>
 
-    <section id="ky-nang" class="section" aria-labelledby="ky-nang-heading">
-      <header class="section-header"><span class="number">02</span><h2 id="ky-nang-heading" class="section-title">Kỹ năng.</h2></header>
-      <ul class="grid">
-        <li class="card">
-          <h3 class="card-title">Frontend</h3>
-          <ul class="tags"><li>React</li><li>Next.js</li><li>TypeScript</li><li>CSS</li></ul>
-        </li>
-        <li class="card">
-          <h3 class="card-title">Backend</h3>
-          <ul class="tags"><li>Node.js</li><li>Go</li><li>PostgreSQL</li><li>NATS</li></ul>
-        </li>
-        <li class="card">
-          <h3 class="card-title">Hạ tầng</h3>
-          <ul class="tags"><li>Docker</li><li>Cloudflare</li><li>Keycloak</li><li>Linux</li></ul>
-        </li>
-      </ul>
+    <!-- ========== HIỆN TẠI ========== -->
+    <section id="hien-tai" class="section" aria-labelledby="hien-tai-h">
+      <header class="sec-head stick" style="--r:1deg">
+        <span class="sec-num">02</span>
+        <h2 id="hien-tai-h" class="hand">Hiện tại</h2>
+      </header>
+      <div class="now">
+        <div class="note note-lime stick" style="--r:-2deg">
+          <span class="pin" aria-hidden="true"></span>
+          <p class="note-label mono"><span class="dot-live" aria-hidden="true"></span>đang làm</p>
+          <p class="note-text">Dồn thời gian cho <b>ThinkAlgo</b> — trung tâm nhỏ dạy Toán tư duy và Lập trình thi đấu. Vừa đứng lớp, vừa viết tiếp hệ thống cho chính trung tâm: LMS có máy chấm bài, xưởng tạo học liệu và lớp điều phối job phía sau.</p>
+        </div>
+        <span class="stamp stick" style="--r:-8deg">cập nhật<br>11 / 2026</span>
+      </div>
     </section>
 
-    <section id="kinh-nghiem" class="section" aria-labelledby="kinh-nghiem-heading">
-      <header class="section-header"><span class="number">03</span><h2 id="kinh-nghiem-heading" class="section-title">Kinh nghiệm.</h2></header>
-      <!-- DRAFT: replace with your real experience, newest first. Copy one <li> per entry. -->
-      <ol class="timeline">
-        <li class="timeline-item">
-          <p class="when">2026</p>
-          <div>
-            <h3 class="card-title">ThinkAlgo</h3>
-            <p class="card-description">Thiết kế và vận hành nền tảng học thuật toán, từ ứng dụng web đến hạ tầng.</p>
+    <!-- ========== ĐÃ LÀM ========== -->
+    <section id="da-lam" class="section" aria-labelledby="da-lam-h">
+      <header class="sec-head stick" style="--r:-1deg">
+        <span class="sec-num">03</span>
+        <h2 id="da-lam-h" class="hand">Đã làm</h2>
+        <span class="sec-meta hand">← bấm vào để mở trang riêng</span>
+      </header>
+
+      <ul class="projects">
+        <li class="stick" style="--r:-1.5deg">
+          <a class="project" href="projects/thinkalgo/" style="--accent:#dca027; --card:#1b2133; --card-ink:#eef1f8;">
+            <span class="tape tape-top" aria-hidden="true"></span>
+            <div class="project-top">
+              <span class="mono project-year">08/2026 — nay</span>
+              <span class="tag-live"><span class="dot-live" aria-hidden="true"></span>đang làm</span>
+            </div>
+            <h3 class="project-title">ThinkAlgo</h3>
+            <p class="project-desc">Trung tâm dạy Toán tư duy và Lập trình thi đấu, cùng hệ thống tôi tự viết để vận hành nó: LMS có sẵn máy chấm bài, xưởng tạo học liệu bằng agent, một lớp điều phối job dùng chung cho cả chấm bài lẫn học liệu, và hạ tầng.</p>
+            <div class="project-foot">
+              <div class="tags"><span>giáo dục</span><span>lập trình thi đấu</span><span>5 repo</span></div>
+              <span class="project-go" aria-hidden="true">→</span>
+            </div>
+          </a>
+        </li>
+        <!--
+          Thêm dự án: sao chép khối <li> phía trên, đổi --accent (màu nhấn), --card (màu thẻ),
+          --card-ink (màu chữ), --r (độ nghiêng), tiêu đề, mô tả và href="projects/<slug>/".
+        -->
+        <li class="stick" style="--r:1.8deg">
+          <div class="project project-soon">
+            <span class="mono project-year">sắp có</span>
+            <h3 class="project-title hand">trang tiếp theo…</h3>
+            <p class="project-desc">Các dự án, sản phẩm và ghi chép khác sẽ được dán dần vào đây.</p>
           </div>
         </li>
-      </ol>
+      </ul>
     </section>
 
-    <section id="lien-he" class="section" aria-labelledby="lien-he-heading">
-      <header class="section-header"><span class="number">04</span><h2 id="lien-he-heading" class="section-title">Liên hệ.</h2></header>
+    <!-- ========== LIÊN KẾT ========== -->
+    <section id="lien-ket" class="section" aria-labelledby="lien-ket-h">
+      <header class="sec-head stick" style="--r:1deg">
+        <span class="sec-num">04</span>
+        <h2 id="lien-ket-h" class="hand">Liên kết</h2>
+      </header>
       <div class="contact">
-        <p class="micro">CÙNG LÀM GÌ ĐÓ NHÉ?</p>
-        <p class="contact-lead">Tôi sẵn sàng trao đổi về dự án, công việc hoặc ThinkAlgo.</p>
-        <div class="row">
-          <a class="button" href="https://github.com/Hiulaptop" rel="noopener" target="_blank">GitHub ↗</a>
-          <a class="button" href="https://lms.thinkcode.vn" rel="noopener" target="_blank">ThinkCode ↗</a>
+        <p class="contact-big stick" style="--r:-1deg">Tình cờ ghé qua và muốn <span class="hl hl-pink">trò chuyện</span>?</p>
+        <div class="contact-links">
+          <a class="link-sticker stick" style="--r:-3deg;--bg:var(--lime)" href="https://github.com/Hiulaptop" rel="noopener" target="_blank"><b>GitHub</b><span class="mono">github.com/Hiulaptop</span></a>
+          <a class="link-sticker stick" style="--r:2deg;--bg:var(--sky)" href="https://lms.thinkcode.vn" rel="noopener" target="_blank"><b>ThinkAlgo LMS</b><span class="mono">lms.thinkcode.vn</span></a>
+          <!-- Thêm email nếu muốn công khai: <a class="link-sticker stick" style="--r:3deg;--bg:var(--paper)" href="mailto:...">...</a> -->
         </div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="footer-inner">
-      <span class="footer-brand">© Hiếu</span>
-      <span class="footer-note">Thiết kế theo <a class="footer-link" href="https://lms.thinkcode.vn/brand-guideline" rel="noopener">ThinkAlgo Brand Guideline</a></span>
-    </div>
+    <span class="hand">— hết trang, còn tiếp —</span>
+    <span class="mono">© Hiếu · hiulaptop.me · Việt Nam</span>
   </footer>
-</div>
 </body>
 </html>
