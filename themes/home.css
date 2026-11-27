@@ -1,0 +1,41 @@
+/*
+ * Home archive palette (hiulaptop.me)
+ * Neutral editorial warm-paper & carbon-ink theme so the personal index
+ * stays industry-agnostic and lets each project's detail palette stand out.
+ */
+
+:root {
+  --neo-canvas: #f6f5f0;
+  --neo-surface: #ffffff;
+  --neo-surface-muted: #eae8e0;
+  --neo-ink: #141413;
+  --neo-text-muted: #575650;
+  --neo-primary: #ded9cb;
+  --neo-secondary: #141413;
+  --neo-secondary-foreground: #f6f5f0;
+  --neo-accent: #ede9dd;
+  --neo-brand-ink: #141413;
+  --neo-border: #141413;
+  --neo-shadow-color: #141413;
+  --neo-focus: #141413;
+  --neo-link: #141413;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --neo-canvas: #121211;
+    --neo-surface: #1b1b19;
+    --neo-surface-muted: #2a2a26;
+    --neo-ink: #f4f3ee;
+    --neo-text-muted: #b5b3a8;
+    --neo-primary: #e5e0d4;
+    --neo-secondary: #0a0a09;
+    --neo-secondary-foreground: #f4f3ee;
+    --neo-accent: #f6f5f0;
+    --neo-brand-ink: #121211;
+    --neo-border: #e5e0d4;
+    --neo-shadow-color: #000000;
+    --neo-focus: #f4f3ee;
+    --neo-link: #f4f3ee;
+  }
+}
