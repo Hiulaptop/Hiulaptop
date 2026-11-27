@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scrapbook · Bảng màu & các phần</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&family=Caveat:wght@600;700&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#141210;color:#ece4d4;font-family:'Be Vietnam Pro',system-ui,sans-serif;line-height:1.6;
+  background-image:radial-gradient(#25211c 1px,transparent 1px);background-size:20px 20px}
+h1,h2,h3,p{margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding:56px 16px 120px}
+.hand{font-family:'Caveat',cursive}
+.mono{font-family:'JetBrains Mono',monospace}
+header.top h1{font:700 clamp(48px,8vw,88px)/1 'Caveat';color:#ffd36e;transform:rotate(-2deg);display:inline-block}
+header.top p{color:#b8ad98;max-width:60ch;margin-top:14px}
+.tabs{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.tabs a{color:#ece4d4;text-decoration:none;padding:8px 16px;border:1.5px dashed #5a5246;border-radius:999px;font-size:14px}
+.tabs a:hover{border-color:#ffd36e;color:#ffd36e}
+h2.sec{font:700 clamp(40px,5vw,56px)/1 'Caveat';margin:72px 0 6px;color:#f4efe6}
+.sub{color:#a89f8b;margin-bottom:28px}
+
+/* ---------- Bảng màu ---------- */
+.palettes{display:grid;gap:28px}
+.pal{display:grid;grid-template-columns:340px 1fr;gap:0;border-radius:6px;overflow:hidden;box-shadow:0 24px 50px -24px #000;
+  border:1px solid #2c2720;background:#1b1815;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.pal:nth-child(odd){transform:rotate(-.4deg)}.pal:nth-child(even){transform:rotate(.4deg)}
+.pal:hover{transform:rotate(0) translateY(-4px)}
+.pal.chosen{outline:3px solid #4ade80;outline-offset:4px}
+.meta{padding:24px;display:flex;flex-direction:column;gap:12px}
+.meta .n{font-size:12px;color:#8a8070}
+.meta h3{font:700 36px/1 'Caveat';color:#ffd36e}
+.meta p{font-size:14px;color:#b8ad98}
+.sw{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:4px}
+.sw button{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:4px;font:11px 'JetBrains Mono';color:#a89f8b}
+.sw button i{display:block;height:42px;border-radius:4px;border:1px solid rgba(255,255,255,.12);transition:transform .2s}
+.sw button:hover i{transform:scale(1.06)}
+.sw button b{font-weight:400;color:#d8cfbd;font-size:10px}
+.pick{margin-top:auto;padding:12px 16px;border-radius:8px;border:1.5px solid #5a5246;background:none;color:#ece4d4;font:700 14px 'Be Vietnam Pro';cursor:pointer;transition:.2s}
+.pick:hover{background:#ece4d4;color:#141210}
+.pal.chosen .pick{background:#4ade80;color:#06210f;border-color:#4ade80}
+.pal.chosen .pick::after{content:' ✓'}
+
+/* bản xem thử dùng biến màu */
+.pv{position:relative;min-height:340px;overflow:hidden;background:var(--bg);color:var(--text);
+  background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:16px 16px}
+.pv .pol{position:absolute;left:7%;top:12%;width:150px;background:var(--paper);padding:8px 8px 34px;box-shadow:0 14px 26px -8px rgba(0,0,0,.7);
+  transform-origin:50% -8px;animation:swing 5s ease-in-out infinite}
+@keyframes swing{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(-2deg)}}
+.pv .ph{aspect-ratio:1;position:relative;overflow:hidden;background:var(--photo)}
+.pv .ph::before{content:'';position:absolute;left:50%;top:22%;width:38%;aspect-ratio:1;border-radius:50%;background:var(--photo2);transform:translateX(-50%)}
+.pv .ph::after{content:'';position:absolute;left:50%;bottom:-20%;width:80%;aspect-ratio:1;border-radius:50%;background:var(--photo2);transform:translateX(-50%)}
+.pv .pol p{position:absolute;left:0;right:0;bottom:6px;text-align:center;font:700 18px 'Caveat';color:var(--paperInk)}
+.pv .tape{position:absolute;top:-10px;left:50%;width:64px;height:20px;margin-left:-32px;background:var(--tape);transform:rotate(-4deg)}
+.pv .note{position:absolute;left:44%;top:10%;right:6%}
+.pv .note h4{margin:0;font:700 clamp(30px,3.4vw,44px)/1 'Caveat';color:var(--ink)}
+.pv .note p{margin-top:8px;font-size:13px;color:var(--muted)}
+.pv .hl{background:linear-gradient(transparent 55%,var(--hl) 55% 90%,transparent 90%);color:var(--text)}
+.pv .card{position:absolute;right:6%;bottom:9%;width:46%;padding:12px 14px;background:#1b2133;border-radius:3px;transform:rotate(2deg);box-shadow:0 12px 24px -10px #000}
+.pv .card b{color:#dca027;font-size:17px}.pv .card span{display:block;font-size:11px;color:#c8d0e0}
+.pv .stk{position:absolute;display:grid;place-items:center;border-radius:50%;font:700 11px 'Be Vietnam Pro';text-align:center;line-height:1.1;animation:wig 2.6s ease-in-out infinite}
+.pv .k1{left:30%;bottom:12%;width:62px;height:62px;background:var(--a1);color:var(--a1ink);rotate:-10deg}
+.pv .k2{left:6%;bottom:8%;width:50px;height:50px;background:var(--a2);color:var(--a2ink);animation-delay:-1.3s}
+@keyframes wig{50%{transform:rotate(12deg)}}
+.pv .stamp{position:absolute;right:8%;top:56%;font:700 12px 'JetBrains Mono';color:var(--a3);border:2px solid var(--a3);padding:4px 8px;border-radius:4px;transform:rotate(-8deg);opacity:.85;letter-spacing:.1em}
+
+/* ---------- Các phần ---------- */
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin-bottom:22px;color:#b8ad98}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.board{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:22px}
+.sticky{position:relative;padding:22px 20px 18px;border-radius:2px;color:#2a241c;box-shadow:0 16px 28px -14px rgba(0,0,0,.8);transition:transform .3s}
+.sticky:nth-child(3n+1){transform:rotate(-1.2deg)}.sticky:nth-child(3n+2){transform:rotate(.8deg)}.sticky:nth-child(3n){transform:rotate(-.4deg)}
+.sticky:hover{transform:rotate(0) scale(1.02);z-index:2}
+.sticky.must{background:#ffe08a}.sticky.should{background:#f3ead8}.sticky.opt{background:#cfe9dc}
+.sticky::before{content:'';position:absolute;top:-10px;left:50%;width:70px;height:20px;margin-left:-35px;background:rgba(255,255,255,.45);transform:rotate(-3deg)}
+.sticky .no{font:12px 'JetBrains Mono';opacity:.6}
+.sticky h3{font:700 30px/1.05 'Caveat';margin:4px 0 8px}
+.sticky p{font-size:13.5px}
+.sticky ul{margin:10px 0 0;padding-left:18px;font-size:13px}
+.sticky .need{margin-top:12px;padding-top:10px;border-top:1.5px dashed rgba(0,0,0,.25);font-size:12.5px}
+.sticky .need b{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.65}
+
+.tpl{margin-top:36px;background:#f4efe6;color:#2a241c;padding:28px;border-radius:3px;box-shadow:0 20px 40px -20px #000;transform:rotate(-.3deg);position:relative}
+.tpl h3{font:700 36px/1 'Caveat';color:#b5462f}
+.tpl ol{margin:14px 0 0;padding-left:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px 28px;font-size:14px}
+.tpl li b{color:#1b2133}
+
+.dock{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:12px;
+  padding:10px 10px 10px 18px;border-radius:12px;background:rgba(27,24,21,.92);border:1px solid #3a342b;backdrop-filter:blur(10px);font-size:14px;max-width:calc(100% - 32px)}
+.dock b{color:#4ade80}
+.dock button{padding:8px 14px;border-radius:8px;border:0;background:#ffd36e;color:#141210;font-weight:700;cursor:pointer;white-space:nowrap}
+.dock button:disabled{opacity:.35;cursor:default}
+.toast{position:fixed;top:16px;left:50%;transform:translate(-50%,-80px);background:#ffd36e;color:#141210;padding:8px 14px;border-radius:8px;font-size:13px;transition:transform .3s;z-index:60}
+.toast.on{transform:translate(-50%,0)}
+
+@media (max-width:820px){.pal{grid-template-columns:1fr}.pv .pol{width:120px}.pv .note{left:46%}.pv .k1{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>Scrapbook ✂</h1>
+    <p>Phong cách bạn đã chọn. Phía dưới có <b>5 bảng màu</b>, mỗi bảng kèm bản xem thử. Bấm vào ô màu để chép mã màu. Cuối trang là <b>các phần nên viết</b> cho trang lưu trữ.</p>
+    <nav class="tabs"><a href="#mau">① Bảng màu</a><a href="#phan">② Các phần nên viết</a><a href="#mau-du-an">③ Khung một trang dự án</a></nav>
+  </header>
+
+  <h2 class="sec" id="mau">① Bảng màu</h2>
+  <p class="sub">Màu của từng dự án (như navy và vàng của ThinkAlgo) vẫn giữ riêng trên thẻ dự án. Bảng màu dưới đây chỉ áp dụng cho “cuốn sổ” bao quanh.</p>
+  <div class="palettes" id="palettes"></div>
+
+  <h2 class="sec" id="phan">② Các phần nên viết</h2>
+  <p class="sub">Tôi chia làm ba mức. Mục <b>“Bạn cần cung cấp”</b> là những thông tin tôi không tự bịa ra được.</p>
+  <div class="legend"><span><i style="background:#ffe08a"></i>Nên có ngay</span><span><i style="background:#f3ead8"></i>Nên có sau</span><span><i style="background:#cfe9dc"></i>Tuỳ thích</span></div>
+  <div class="board" id="board"></div>
+
+  <div class="tpl" id="mau-du-an">
+    <h3>③ Khung cho mỗi trang dự án</h3>
+    <p style="font-size:14px;margin-top:6px;color:#5a5044">Mọi dự án viết theo cùng một khung để kho lưu trữ đồng đều. Trang ThinkAlgo hiện tại có thể sắp lại theo khung này.</p>
+    <ol>
+      <li><b>Một câu tóm tắt</b> — dự án là gì, cho ai.</li>
+      <li><b>Thời gian & vai trò</b> — từ khi nào, bạn làm phần nào.</li>
+      <li><b>Bối cảnh</b> — vì sao làm, vấn đề lúc đó là gì.</li>
+      <li><b>Đã làm gì</b> — các phần chính, có ảnh chụp hoặc sơ đồ.</li>
+      <li><b>Chỗ khó</b> — 1–3 vấn đề đáng nhớ và cách xử lý.</li>
+      <li><b>Kết quả</b> — con số thật nếu có (học sinh, bài nộp, thời gian tiết kiệm…).</li>
+      <li><b>Học được gì</b> — vài dòng tự nhìn lại.</li>
+      <li><b>Trạng thái & liên kết</b> — đang chạy, tạm dừng hay đã đóng; link repo hoặc trang web.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="dock"><span id="choice">Chưa chọn bảng màu</span><button id="copy" disabled>Sao chép</button></div>
+<div class="toast" id="toast"></div>
+
+<script>
+(() => {
+  const P = [
+    { id:'night-desk', name:'Bàn gỗ đêm', desc:'Gỗ tối, giấy kem, mực vàng ấm. Gần với mẫu bạn vừa xem, ấm và dễ đọc lâu.',
+      c:{bg:'#1a1714',dot:'#2a2520',paper:'#f4efe6',paperInk:'#333',text:'#efe6d6',muted:'#b9ad99',ink:'#ffd36e',tape:'rgba(255,230,140,.6)',hl:'rgba(255,211,110,.35)',photo:'#c9bfae',photo2:'#8d8170',a1:'#ff7a59',a1ink:'#fff',a2:'#7cf2c5',a2ink:'#0b2a20',a3:'#ff7a59'},
+      sw:[['Nền','#1a1714'],['Giấy','#f4efe6'],['Mực vàng','#ffd36e'],['Cam','#ff7a59'],['Bạc hà','#7cf2c5'],['Chữ','#efe6d6'],['Chữ phụ','#b9ad99'],['Viền','#2a2520']] },
+    { id:'kraft', name:'Giấy kraft & bút bi', desc:'Nâu cà phê, giấy kraft, mực bút bi xanh, dấu mộc đỏ. Giống sổ tay học trò, hợp với chuyện đi dạy.',
+      c:{bg:'#1c1915',dot:'#2d2822',paper:'#d9bf98',paperInk:'#2b2116',text:'#f1e8d8',muted:'#bfae93',ink:'#7fa6ff',tape:'rgba(240,235,220,.55)',hl:'rgba(127,166,255,.3)',photo:'#b79c76',photo2:'#7a6347',a1:'#c8463d',a1ink:'#fff',a2:'#8fb98b',a2ink:'#14260f',a3:'#e0574b'},
+      sw:[['Nền','#1c1915'],['Kraft','#d9bf98'],['Bút bi','#7fa6ff'],['Dấu mộc','#c8463d'],['Lá','#8fb98b'],['Chữ','#f1e8d8'],['Chữ phụ','#bfae93'],['Viền','#2d2822']] },
+    { id:'navy-highlighter', name:'Sổ xanh than & bút dạ quang', desc:'Nền xanh than, gạch chân bằng bút dạ quang vàng và hồng. Hiện đại hơn mà vẫn ra chất sổ tay, lại hợp với navy của ThinkAlgo.',
+      c:{bg:'#131a24',dot:'#1f2836',paper:'#ece6da',paperInk:'#1d2433',text:'#e6e1d6',muted:'#a3adbd',ink:'#f7d046',tape:'rgba(242,155,180,.55)',hl:'rgba(247,208,70,.38)',photo:'#bfc6d2',photo2:'#7d889b',a1:'#f29bb4',a1ink:'#3a0f1f',a2:'#6fd1c4',a2ink:'#0a2b27',a3:'#f29bb4'},
+      sw:[['Nền','#131a24'],['Giấy','#ece6da'],['Dạ quang','#f7d046'],['Hồng','#f29bb4'],['Ngọc','#6fd1c4'],['Chữ','#e6e1d6'],['Chữ phụ','#a3adbd'],['Viền','#1f2836']] },
+    { id:'old-film', name:'Phim cũ', desc:'Nâu sepia, cam cháy, xanh olive. Hoài niệm như album ảnh cũ, hợp với phần dòng thời gian và ảnh kỷ niệm.',
+      c:{bg:'#17130f',dot:'#272019',paper:'#e9dcc3',paperInk:'#3a2a1a',text:'#ede3cf',muted:'#b3a184',ink:'#e8935a',tape:'rgba(233,220,195,.45)',hl:'rgba(224,122,63,.32)',photo:'#a8906c',photo2:'#6c5539',a1:'#e07a3f',a1ink:'#fff',a2:'#9aa35a',a2ink:'#1c1f0a',a3:'#c0503a'},
+      sw:[['Nền','#17130f'],['Sepia','#e9dcc3'],['Cam cháy','#e07a3f'],['Olive','#9aa35a'],['Nâu đỏ','#8e3b2f'],['Chữ','#ede3cf'],['Chữ phụ','#b3a184'],['Viền','#272019']] },
+    { id:'pop', name:'Sticker pop', desc:'Nền than trung tính, giấy trắng, sticker neon vàng chanh, hồng và xanh. Trẻ, vui, nhiều năng lượng nhất trong 5 bảng.',
+      c:{bg:'#121212',dot:'#222',paper:'#f5f5f0',paperInk:'#222',text:'#ececec',muted:'#a5a5a5',ink:'#e8ff59',tape:'rgba(95,211,255,.5)',hl:'rgba(255,95,162,.35)',photo:'#cfcfcf',photo2:'#8a8a8a',a1:'#ff5fa2',a1ink:'#fff',a2:'#5fd3ff',a2ink:'#042433',a3:'#e8ff59'},
+      sw:[['Nền','#121212'],['Giấy','#f5f5f0'],['Chanh','#e8ff59'],['Hồng','#ff5fa2'],['Xanh','#5fd3ff'],['Chữ','#ececec'],['Chữ phụ','#a5a5a5'],['Viền','#222222']] },
+  ];
+
+  const S = [
+    ['must','Trang đầu (Hero)','Polaroid chân dung, lời chào viết tay và một câu “tôi là ai” theo cách của bạn.',
+      ['Ảnh chân dung 4:5','Một câu giới thiệu bản thân'],['Ảnh','Câu giới thiệu']],
+    ['must','Đôi dòng về tôi','Một đoạn ngắn kể chuyện, không phải CV: bạn đến với việc làm sản phẩm và đi dạy như thế nào, thích làm gì, làm việc ra sao.',
+      ['3–5 đoạn ngắn','1–2 ảnh đời thường'],['Câu chuyện của bạn','Nơi học / sống (nếu muốn công khai)']],
+    ['must','Hiện tại (Now)','Đang làm gì, đang học gì, đang quan tâm gì. Ghi ngày cập nhật, mỗi tháng sửa một lần.',
+      ['ThinkAlgo','Đang học / đọc','Mục tiêu gần'],['Đang học / đọc gì','Mục tiêu sắp tới']],
+    ['must','Đã làm (dự án)','Các thẻ dự án dán lên trang sổ, mỗi thẻ mang màu riêng và mở sang trang chi tiết theo khung ③.',
+      ['ThinkAlgo (đã có)','Các dự án khác'],['Danh sách dự án khác: tên, năm, 1 câu mô tả']],
+    ['must','Liên kết / Để lại lời nhắn','GitHub, email, mạng xã hội. Trình bày như mẩu giấy dán băng keo cuối sổ.',
+      [],['Email / mạng xã hội muốn công khai']],
+    ['should','Dòng thời gian','Các mốc theo năm: bắt đầu học, cuộc thi, lần đầu đi dạy, lập ThinkAlgo… Mỗi mốc là một mẩu giấy dán trên dây.',
+      ['Mốc năm','Ảnh nhỏ cho từng mốc'],['5–10 mốc kèm năm']],
+    ['should','Góc đi dạy','Riêng cho chuyện giảng dạy: dạy gì, cho ai, những lớp hay kỳ thi đáng nhớ, học trò tiêu biểu (nếu được phép).',
+      ['Khoá học','Thành tích học sinh','Cách dạy'],['Khoá học và con số thật','Có được nhắc tên học sinh không']],
+    ['should','Ghi chép','Bài viết ngắn: bài học khi dựng hệ thống, mẹo giải thuật, chuyện vận hành trung tâm. Đây là phần sống lâu nhất của kho lưu trữ.',
+      ['Mỗi bài 300–800 chữ'],['2–3 đề tài cho bài đầu tiên']],
+    ['opt','Góc ảnh','Một bức tường polaroid ghi lại khoảnh khắc: lớp học, sự kiện, góc làm việc.',
+      [],['Ảnh muốn đăng']],
+    ['opt','Đồ nghề (Uses)','Máy, phần mềm, công cụ hằng ngày, trình bày như sticker dán đầy trang.',
+      [],['Danh sách đồ nghề']],
+    ['opt','Nghĩa địa dự án','Những thứ đã bỏ dở hay thất bại và lý do. Rất hợp tinh thần “lưu lại những gì đã làm”, lại thật và dễ gây thiện cảm.',
+      [],['Các dự án bỏ dở và lý do']],
+    ['opt','Sổ lưu bút','Khách ghé thăm để lại một dòng. Phần này cần thêm chỗ lưu dữ liệu, nên làm sau cùng.',
+      [],['Có muốn bật hay không']],
+  ];
+
+  // bảng màu
+  const box = document.getElementById('palettes');
+  P.forEach((p, i) => {
+    const vars = Object.entries(p.c).map(([k, v]) => `--${k}:${v}`).join(';');
+    const el = document.createElement('article');
+    el.className = 'pal'; el.dataset.name = p.name;
+    el.innerHTML = `
+      <div class="meta">
+        <span class="n mono">${String(i + 1).padStart(2, '0')} / 05</span>
+        <h3>${p.name}</h3><p>${p.desc}</p>
+        <div class="sw">${p.sw.map(([n, h]) => `<button data-hex="${h}" title="Chép ${h}"><i style="background:${h}"></i>${n}<b>${h}</b></button>`).join('')}</div>
+        <button class="pick">Chọn bảng màu này</button>
+      </div>
+      <div class="pv" style="${vars}">
+        <div class="pol"><div class="tape"></div><div class="ph"></div><p>Hiếu, 2026 ♡</p></div>
+        <div class="note"><h4>Những thứ<br>tôi đã làm</h4><p>Một cuốn sổ lưu lại <span class="hl">sản phẩm, hệ thống</span> và những lớp học.</p></div>
+        <div class="stk k1">đang<br>làm</div><div class="stk k2">mới!</div>
+        <div class="stamp">ĐÃ LÀM</div>
+        <div class="card"><b>ThinkAlgo</b><span>Giáo dục lập trình thi đấu · 7 repo</span></div>
+      </div>`;
+    box.appendChild(el);
+  });
+
+  // các phần
+  const board = document.getElementById('board');
+  S.forEach(([lv, title, desc, items, need], i) => {
+    const el = document.createElement('div');
+    el.className = 'sticky ' + lv;
+    el.innerHTML = `<span class="no">${String(i + 1).padStart(2, '0')}</span><h3>${title}</h3><p>${desc}</p>
+      ${items.length ? `<ul>${items.map((x) => `<li>${x}</li>`).join('')}</ul>` : ''}
+      <div class="need"><b>Bạn cần cung cấp</b>${need.join(' · ')}</div>`;
+    board.appendChild(el);
+  });
+
+  // chép mã màu
+  const toast = document.getElementById('toast');
+  const say = (t) => { toast.textContent = t; toast.classList.add('on'); setTimeout(() => toast.classList.remove('on'), 1200); };
+  box.addEventListener('click', async (e) => {
+    const b = e.target.closest('[data-hex]'); if (!b) return;
+    try { await navigator.clipboard.writeText(b.dataset.hex); say('Đã chép ' + b.dataset.hex); } catch { say(b.dataset.hex); }
+  });
+
+  // chọn bảng màu
+  const cards = [...box.children], choice = document.getElementById('choice'), copy = document.getElementById('copy');
+  let picked = null; try { picked = localStorage.getItem('hiu-palette'); } catch {}
+  const render = () => {
+    cards.forEach((c) => c.classList.toggle('chosen', c.dataset.name === picked));
+    choice.innerHTML = picked ? `Bảng màu: <b>${picked}</b>` : 'Chưa chọn bảng màu';
+    copy.disabled = !picked;
+  };
+  cards.forEach((c) => c.querySelector('.pick').addEventListener('click', () => {
+    picked = picked === c.dataset.name ? null : c.dataset.name;
+    try { picked ? localStorage.setItem('hiu-palette', picked) : localStorage.removeItem('hiu-palette'); } catch {}
+    render();
+  }));
+  copy.addEventListener('click', async () => {
+    const t = `Tôi chọn Scrapbook, bảng màu: ${picked}`;
+    try { await navigator.clipboard.writeText(t); say('Đã chép, dán vào chat nhé'); } catch { prompt('Sao chép:', t); }
+  });
+  render();
+})();
+</script>
+</body>
+</html>

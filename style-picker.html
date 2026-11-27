@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chọn phong cách · hiulaptop.me</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,500;0,800;1,500&family=Space+Grotesk:wght@500;700&family=Caveat:wght@600&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth;background:#050506}
+body{margin:0;background:#050506;color:#eee;font-family:'Be Vietnam Pro',system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,p{margin:0}
+button{font:inherit;cursor:pointer}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* ===== Khung trang chọn ===== */
+.intro,.stage{min-height:100vh;scroll-snap-align:start;position:relative}
+.intro{display:grid;place-content:center;text-align:center;padding:40px 16px;gap:18px;
+  background:radial-gradient(ellipse at 50% 30%,#1b1730,#050506 70%)}
+.intro h1{font-size:clamp(36px,7vw,84px);font-weight:900;letter-spacing:-.04em;line-height:1}
+.intro p{color:#9a9aa5;max-width:52ch;margin:0 auto}
+.intro .hint{margin-top:30px;font-size:13px;color:#777;animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(8px)}}
+.thumbs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:10px}
+.thumbs a{color:#ccc;text-decoration:none;font-size:13px;padding:6px 12px;border:1px solid #2a2a33;border-radius:999px;transition:.25s}
+.thumbs a:hover{border-color:#fff;color:#fff}
+
+.stage{display:grid;grid-template-columns:320px 1fr;gap:28px;align-items:center;padding:28px clamp(16px,3vw,40px) 96px;border-top:1px solid #15151a}
+.info .num{font-size:13px;color:#777}
+.info h2{font-size:clamp(28px,3vw,40px);font-weight:900;letter-spacing:-.03em;margin:8px 0 12px;line-height:1.05}
+.info p{color:#a3a3ad;font-size:15px;line-height:1.6}
+.info ul{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:6px;font-size:14px;color:#c8c8cf}
+.info li::before{content:'→ ';color:#666}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.chips span{font-size:11px;padding:3px 9px;border-radius:999px;border:1px solid #2c2c36;color:#aaa}
+.pick{margin-top:22px;width:100%;padding:14px 18px;border-radius:12px;border:1px solid #3a3a46;background:#121218;color:#fff;font-weight:700;transition:.25s;display:flex;justify-content:space-between;align-items:center}
+.pick:hover{background:#fff;color:#000}
+.stage.chosen .pick{background:#4ade80;color:#04140a;border-color:#4ade80}
+.stage.chosen .pick .lbl::after{content:' ✓'}
+
+.frame{border-radius:16px;overflow:hidden;border:1px solid #23232b;box-shadow:0 40px 80px -30px #000;background:#000;
+  height:min(78vh,720px);display:flex;flex-direction:column;
+  opacity:0;transform:translateY(40px) scale(.98);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.stage.in .frame{opacity:1;transform:none}
+.bar{flex:none;height:34px;display:flex;align-items:center;gap:6px;padding:0 12px;background:#141418;border-bottom:1px solid #23232b}
+.bar i{width:10px;height:10px;border-radius:50%;background:#3a3a44}
+.bar i:nth-child(1){background:#ff5f57}.bar i:nth-child(2){background:#febc2e}.bar i:nth-child(3){background:#28c840}
+.bar span{margin-left:12px;font:12px 'JetBrains Mono',monospace;color:#777}
+.mock{flex:1;position:relative;overflow:hidden}
+
+/* chân dung giả lập */
+.ph{position:relative;overflow:hidden;background:var(--phbg,#222);color:var(--phfg,#555)}
+.ph::before{content:'';position:absolute;left:50%;top:22%;width:36%;aspect-ratio:1;border-radius:50%;background:currentColor;transform:translateX(-50%)}
+.ph::after{content:'';position:absolute;left:50%;bottom:-18%;width:78%;aspect-ratio:1;border-radius:50%;background:currentColor;transform:translateX(-50%)}
+
+/* thanh dưới */
+.dock{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:12px;
+  padding:10px 10px 10px 18px;border-radius:14px;background:rgba(18,18,24,.85);border:1px solid #2a2a33;backdrop-filter:blur(12px);
+  font-size:14px;max-width:calc(100% - 32px)}
+.dock b{color:#4ade80}
+.dock button{padding:8px 14px;border-radius:10px;border:0;background:#fff;color:#000;font-weight:700;white-space:nowrap}
+.dock button:disabled{opacity:.35;cursor:default}
+.dots{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;gap:10px}
+.dots a{width:8px;height:8px;border-radius:50%;background:#444;transition:.3s}
+.dots a.on{background:#fff;transform:scale(1.5)}
+.dots a.picked{background:#4ade80}
+
+/* ===== 01 Aurora Glass ===== */
+.s1{background:#08080a;color:#f3f3ef}
+.s1 .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.4}
+.s1 .b1{width:340px;height:340px;background:#8b7bff;top:-100px;left:-60px;animation:d1 14s ease-in-out infinite alternate}
+.s1 .b2{width:300px;height:300px;background:#7cf2c5;bottom:-120px;right:-40px;opacity:.25;animation:d2 16s ease-in-out infinite alternate}
+@keyframes d1{to{transform:translate(160px,90px)}}@keyframes d2{to{transform:translate(-160px,-80px)}}
+.s1 .wrap{position:relative;height:100%;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:30px;padding:0 6%}
+.s1 .pill{display:inline-block;font:11px 'JetBrains Mono';letter-spacing:.08em;padding:5px 12px;border:1px solid #333;border-radius:99px;color:#999}
+.s1 h3{font-size:clamp(34px,5vw,68px);font-weight:900;letter-spacing:-.045em;line-height:1.02;margin:18px 0}
+.grad{background:linear-gradient(100deg,#7cf2c5,#8b7bff 55%,#ff7ab6);background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gs 5s ease-in-out infinite alternate}
+@keyframes gs{to{background-position:100%}}
+.s1 .lead{color:#8d8f99;font-size:15px;max-width:40ch}
+.s1 .por{position:relative;aspect-ratio:4/5;border-radius:24px;padding:2px;background:conic-gradient(from var(--a),transparent 50%,#7cf2c5,#8b7bff,#ff7ab6,transparent);animation:spin 4s linear infinite}
+@property --a{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes spin{to{--a:360deg}}
+.s1 .por .ph{height:100%;border-radius:22px;--phbg:#16161d;--phfg:#2c2a44}
+.s1 .chip{position:absolute;left:-20px;bottom:30px;font-size:12px;padding:8px 12px;border-radius:12px;background:rgba(16,16,22,.8);border:1px solid #333;animation:bob 4s ease-in-out infinite}
+
+/* ===== 02 Editorial Noir ===== */
+.s2{background:#0e0d0b;color:#ece6d8;font-family:'Playfair Display',serif}
+.s2 .wrap{height:100%;display:flex;flex-direction:column;padding:4% 6%}
+.s2 .top{display:flex;justify-content:space-between;font:11px 'JetBrains Mono';letter-spacing:.12em;color:#8a8373;text-transform:uppercase;padding-bottom:10px;border-bottom:1px solid #3a352b}
+.s2 .body{flex:1;display:grid;grid-template-columns:1fr 260px;gap:40px;align-items:end;padding-top:24px}
+.s2 h3{font-size:clamp(48px,8vw,120px);font-weight:500;line-height:.92;letter-spacing:-.03em}
+.s2 h3 em{font-style:italic;color:#c9a96a}
+.s2 .ln{display:block;overflow:hidden}.s2 .ln span{display:block;transform:translateY(105%);transition:transform 1.1s cubic-bezier(.22,1,.36,1)}
+.in .s2 .ln span{transform:none}.in .s2 .ln:nth-child(2) span{transition-delay:.12s}.in .s2 .ln:nth-child(3) span{transition-delay:.24s}
+.s2 .side p{font:15px/1.6 'Be Vietnam Pro';color:#a89f8b;margin-top:14px}
+.s2 .side .ph{aspect-ratio:3/4;--phbg:#1d1b17;--phfg:#3a352b;filter:grayscale(1);clip-path:inset(100% 0 0 0);transition:clip-path 1.4s .3s cubic-bezier(.22,1,.36,1)}
+.in .s2 .side .ph{clip-path:inset(0)}
+.s2 .cap{font:11px 'JetBrains Mono';color:#8a8373;margin-top:8px}
+.s2 .rule{height:1px;background:#3a352b;margin-top:28px;transform:scaleX(0);transform-origin:left;transition:transform 1.4s .4s}
+.in .s2 .rule{transform:scaleX(1)}
+.s2 .foot{display:flex;justify-content:space-between;padding-top:12px;font-size:20px;font-style:italic}
+
+/* ===== 03 Bento ===== */
+.s3{background:#09090b;color:#fafafa;padding:16px}
+.s3 .grid{height:100%;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,1fr);gap:12px}
+.s3 .t{border-radius:20px;background:#131316;border:1px solid #27272a;padding:18px;position:relative;overflow:hidden;
+  opacity:0;transform:scale(.92);transition:opacity .6s,transform .6s cubic-bezier(.34,1.56,.64,1),border-color .3s}
+.in .s3 .t{opacity:1;transform:none}
+.s3 .t:hover{border-color:#52525b;transform:translateY(-3px)}
+.in .s3 .t:nth-child(2){transition-delay:.08s}.in .s3 .t:nth-child(3){transition-delay:.16s}.in .s3 .t:nth-child(4){transition-delay:.24s}.in .s3 .t:nth-child(5){transition-delay:.32s}.in .s3 .t:nth-child(6){transition-delay:.4s}
+.s3 .hello{grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column;justify-content:flex-end}
+.s3 .hello h3{font-size:clamp(28px,3.6vw,48px);font-weight:900;letter-spacing:-.04em;line-height:1.05}
+.s3 .hello p{color:#a1a1aa;font-size:14px;margin-top:8px}
+.s3 .por{grid-column:span 1;grid-row:span 2;padding:0}
+.s3 .por .ph{position:absolute;inset:0;--phbg:#1c1c22;--phfg:#34343e}
+.s3 .por .nm{position:absolute;left:14px;bottom:12px;font-weight:700}
+.s3 .now{background:linear-gradient(140deg,#1d2a20,#131316)}
+.s3 .lbl{font:11px 'JetBrains Mono';color:#71717a;text-transform:uppercase;letter-spacing:.1em}
+.s3 .big{font-size:22px;font-weight:800;margin-top:6px}
+.s3 .live{display:inline-block;width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 0 #4ade80;animation:pg 1.6s infinite}
+@keyframes pg{to{box-shadow:0 0 0 10px transparent}}
+.s3 .proj{grid-column:span 2;background:linear-gradient(130deg,#1b2133,#131316 70%)}
+.s3 .proj .big{color:#dca027;font-size:28px}
+.s3 .gh{display:grid;place-items:center;font-size:30px}
+.s3 .clock{font:700 26px 'JetBrains Mono'}
+
+/* ===== 04 Terminal ===== */
+.s4{background:#0a0f0a;color:#a7f3a0;font-family:'JetBrains Mono',monospace;font-size:14px}
+.s4::after{content:'';position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.25) 0 1px,transparent 1px 3px)}
+.s4 .wrap{height:100%;display:grid;grid-template-columns:1fr 220px;gap:24px;padding:4% 5%}
+.s4 .out{white-space:pre-wrap;line-height:1.7;text-shadow:0 0 6px rgba(120,255,120,.35)}
+.s4 .out .p{color:#5eead4}.s4 .out .y{color:#fde047}.s4 .out .dim{color:#4b6b4b}
+.s4 .cur{display:inline-block;width:9px;height:16px;background:#a7f3a0;vertical-align:-3px;animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+.s4 .ph{aspect-ratio:4/5;border:1px solid #2f4f2f;--phbg:#0f1a0f;--phfg:#1f3a1f}
+.s4 .ph+div{margin-top:8px;font-size:11px;color:#4b6b4b}
+.s4 .box{border:1px dashed #2f4f2f;padding:10px;margin-top:12px;font-size:12px}
+
+/* ===== 05 Swiss Kinetic ===== */
+.s5{background:#0b0b0b;color:#f2f2f2;font-family:'Space Grotesk',sans-serif}
+.s5 .row{white-space:nowrap;font-size:clamp(60px,10vw,150px);font-weight:700;letter-spacing:-.05em;line-height:.9;display:flex;width:max-content}
+.s5 .r1{animation:mq 18s linear infinite}.s5 .r2{animation:mq 22s linear infinite reverse;color:transparent;-webkit-text-stroke:1.5px #f2f2f2}
+.s5 .r3{animation:mq 26s linear infinite;color:#ff3b1f}
+@keyframes mq{to{transform:translateX(-50%)}}
+.s5 .rows{position:absolute;inset:auto 0 0 0;padding-bottom:10px}
+.s5 .head{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:2px solid #f2f2f2;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+.s5 .head div{padding:12px 16px;border-right:2px solid #f2f2f2}
+.s5 .sq{position:absolute;right:6%;top:18%;width:120px;height:150px}
+.s5 .sq .ph{position:absolute;inset:0;--phbg:#ff3b1f;--phfg:#b3260f}
+.s5 .sq::after{content:'';position:absolute;inset:-14px;border:2px solid #f2f2f2;animation:rot 10s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.s5 .txt{position:absolute;left:16px;top:70px;max-width:38ch;font-size:15px;color:#bbb}
+.s5 .txt b{display:block;font-size:40px;color:#fff;letter-spacing:-.04em;line-height:1}
+
+/* ===== 06 Synthwave ===== */
+.s6{background:linear-gradient(#0b0221 0%,#2a0845 55%,#0b0221 55%);color:#fff;perspective:400px}
+.s6 .sun{position:absolute;left:50%;top:14%;width:220px;height:220px;margin-left:-110px;border-radius:50%;
+  background:linear-gradient(#ffe66d,#ff6b9d 60%,#c44569);
+  -webkit-mask:repeating-linear-gradient(#000 0 14px,transparent 14px 18px) bottom/100% 45% no-repeat,linear-gradient(#000,#000) top/100% 56% no-repeat;
+  mask:repeating-linear-gradient(#000 0 14px,transparent 14px 18px) bottom/100% 45% no-repeat,linear-gradient(#000,#000) top/100% 56% no-repeat;
+  filter:drop-shadow(0 0 40px #ff6b9d)}
+.s6 .floor{position:absolute;left:-50%;right:-50%;bottom:-20%;height:65%;transform:rotateX(70deg);transform-origin:top;
+  background-image:linear-gradient(#ff2fd6 2px,transparent 2px),linear-gradient(90deg,#ff2fd6 2px,transparent 2px);background-size:60px 60px;
+  animation:fl 1.2s linear infinite;mask-image:linear-gradient(transparent,#000 40%)}
+@keyframes fl{to{background-position:0 60px}}
+.s6 h3{position:absolute;left:0;right:0;top:50%;text-align:center;font-size:clamp(40px,7vw,96px);font-weight:900;font-style:italic;letter-spacing:-.03em;
+  color:#fff;text-shadow:0 0 10px #ff2fd6,0 0 30px #ff2fd6,0 0 60px #7b2fff;animation:flick 4s infinite}
+@keyframes flick{0%,92%,100%{opacity:1}93%{opacity:.4}95%{opacity:1}96%{opacity:.6}}
+.s6 .sub{position:absolute;left:0;right:0;top:calc(50% + clamp(56px,9vw,120px));text-align:center;font:13px 'JetBrains Mono';letter-spacing:.3em;color:#7ef9ff;text-shadow:0 0 8px #7ef9ff}
+.s6 .ph{position:absolute;left:6%;top:10%;width:110px;height:130px;border:2px solid #7ef9ff;box-shadow:0 0 20px #7ef9ff;--phbg:#1a0533;--phfg:#4a1a7a}
+
+/* ===== 07 Scrapbook ===== */
+.s7{background:#1a1714;color:#efe6d6;background-image:radial-gradient(#2a2520 1px,transparent 1px);background-size:18px 18px}
+.s7 .pol{position:absolute;left:8%;top:10%;width:min(36%,240px);background:#f4efe6;padding:10px 10px 44px;box-shadow:0 20px 40px -10px #000;
+  transform-origin:50% -10px;animation:swing 5s ease-in-out infinite}
+@keyframes swing{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(-1deg)}}
+.s7 .pol .ph{aspect-ratio:1;--phbg:#c9bfae;--phfg:#8d8170}
+.s7 .pol p{position:absolute;left:0;right:0;bottom:10px;text-align:center;font:600 22px 'Caveat';color:#333}
+.s7 .tape{position:absolute;top:-12px;left:50%;width:80px;height:24px;margin-left:-40px;background:rgba(255,230,140,.6);transform:rotate(-3deg)}
+.s7 .note{position:absolute;right:8%;top:12%;width:min(48%,380px)}
+.s7 .note h3{font:600 clamp(40px,5vw,64px)/1 'Caveat';color:#ffd36e}
+.s7 .note p{margin-top:12px;font-size:15px;line-height:1.6;color:#cfc4b2}
+.s7 .card{position:absolute;right:10%;bottom:10%;width:min(46%,340px);padding:16px;background:#22304a;color:#fff;border-radius:4px;transform:rotate(2deg);box-shadow:0 16px 30px -10px #000;transition:transform .4s}
+.s7 .card:hover{transform:rotate(0) scale(1.03)}
+.s7 .card b{color:#dca027;font-size:22px}
+.s7 .stk{position:absolute;display:grid;place-items:center;border-radius:50%;font:700 12px 'Be Vietnam Pro';animation:wig 2.4s ease-in-out infinite}
+.s7 .k1{left:40%;top:16%;width:70px;height:70px;background:#ff7a59;color:#fff;transform:rotate(-12deg)}
+.s7 .k2{left:12%;bottom:12%;width:84px;height:84px;background:#7cf2c5;color:#0b2a20;animation-delay:-1s}
+@keyframes wig{50%{rotate:10deg}}
+.s7 .arrow{position:absolute;left:36%;bottom:26%;font:600 26px 'Caveat';color:#ffd36e;transform:rotate(-8deg)}
+
+/* ===== 08 Cinematic ===== */
+.s8{background:#000;color:#fff}
+.s8 .ph{position:absolute;inset:0;--phbg:radial-gradient(ellipse at 60% 40%,#3a2c22,#0a0806 70%);--phfg:#1a1410;background:var(--phbg)}
+.s8 .ph{animation:kb 18s ease-in-out infinite alternate}
+@keyframes kb{to{transform:scale(1.15) translate(-3%,2%)}}
+.s8 .ph::before{left:62%;top:20%;width:22%}.s8 .ph::after{left:62%;width:50%;bottom:-22%}
+.s8 .grain{position:absolute;inset:-50%;opacity:.12;animation:gr .5s steps(4) infinite;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+@keyframes gr{25%{transform:translate(-5%,3%)}50%{transform:translate(4%,-4%)}75%{transform:translate(-3%,5%)}}
+.s8 .lb{position:absolute;left:0;right:0;height:12%;background:#000;transition:transform 1.2s cubic-bezier(.22,1,.36,1);z-index:2}
+.s8 .lb.t{top:0;transform:translateY(-100%)}.s8 .lb.b{bottom:0;transform:translateY(100%)}
+.in .s8 .lb{transform:none}
+.s8 .txt{position:absolute;left:7%;top:50%;transform:translateY(-50%);z-index:3}
+.s8 .txt small{font:11px 'JetBrains Mono';letter-spacing:.4em;color:#bfa98f}
+.s8 .txt h3{font:500 clamp(44px,7vw,100px)/.95 'Playfair Display';letter-spacing:-.02em;margin-top:12px;opacity:0;filter:blur(12px);transition:1.6s .5s}
+.in .s8 .txt h3{opacity:1;filter:none}
+.s8 .subt{position:absolute;bottom:15%;left:0;right:0;text-align:center;z-index:3;font-size:15px;color:#f1e3c8;opacity:0;transition:1s 1.4s}
+.in .s8 .subt{opacity:1}
+.s8 .vig{position:absolute;inset:0;background:radial-gradient(ellipse,transparent 40%,#000 100%);z-index:1}
+
+@media (max-width:900px){
+  .stage{grid-template-columns:1fr;align-content:start}
+  .frame{height:68vh}
+  .s1 .wrap{grid-template-columns:1fr;padding-top:20px}.s1 .por{display:none}
+  .s2 .body{grid-template-columns:1fr}.s2 .side .ph{display:none}
+  .s3 .grid{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(4,1fr)}
+  .s3 .por,.s3 .clock{display:none}
+  .s4 .wrap{grid-template-columns:1fr}.s4 aside{display:none}
+  .s5 .head{grid-template-columns:repeat(2,1fr)}.s5 .head div:nth-child(n+3){display:none}.s5 .sq{display:none}
+  .s7 .pol{width:42%}.s7 .note{width:46%}.s7 .k1,.s7 .arrow{display:none}
+  .dots{display:none}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.frame{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<section class="intro" id="top">
+  <p class="mono" style="color:#8b7bff;font-size:13px;letter-spacing:.2em">HIULAPTOP.ME · CHỌN PHONG CÁCH</p>
+  <h1>8 phong cách<br>cho trang chủ</h1>
+  <p>Cuộn xuống để xem từng mẫu, mỗi màn hình là một mẫu. Bấm <b>“Chọn phong cách này”</b> ở mẫu bạn thích rồi gửi kết quả cho tôi. Rê chuột vào các mẫu để xem hiệu ứng.</p>
+  <nav class="thumbs" id="thumbs"></nav>
+  <p class="hint mono">↓ cuộn hoặc dùng phím ↑ ↓</p>
+</section>
+
+<!-- 01 -->
+<section class="stage" id="aurora" data-name="Aurora Glass">
+  <div class="info">
+    <span class="num mono">01 / 08 · bản hiện tại</span>
+    <h2>Aurora Glass</h2>
+    <p>Nền đen, các quầng màu trôi chậm, chữ gradient, viền ảnh xoay vòng. Mềm, hiện đại, đúng kiểu sản phẩm công nghệ.</p>
+    <ul><li>Quầng màu trôi, nền kính mờ</li><li>Viền chân dung xoay vòng</li><li>Chữ đổi màu liên tục</li></ul>
+    <div class="chips"><span>hiện đại</span><span>mềm</span><span>công nghệ</span></div>
+    <button class="pick"><span class="lbl">Chọn phong cách này</span><span>→</span></button>
+  </div>
+  <div class="frame"><div class="bar"><i></i><i></i><i></i><span>hiulaptop.me</span></div>
+    <div class="mock s1">
+      <div class="blob b1"></div><div class="blob b2"></div>
+      <div class="wrap">
+        <div><span class="pill">● LƯU TRỮ CÁ NHÂN</span>
+          <h3>Xin chào,<br><span class="grad">tôi là Hiếu.</span></h3>
+          <p class="lead">Chỗ tôi lưu lại những gì mình đã làm — không viết riêng cho ngành nào.</p></div>
+        <div class="por"><div class="ph"></div><div class="chip">🟢 Đang làm <b style="color:#f0c35a">ThinkAlgo</b></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="stage" id="editorial" data-name="Editorial Noir">
+  <div class="info">
+    <span class="num mono">02 / 08</span>
+    <h2>Editorial Noir</h2>
+    <p>Như bìa tạp chí: chữ có chân cỡ thật lớn, nền đen ấm và màu kem, ảnh đen trắng. Chuyển động chậm và sang.</p>
+    <ul><li>Tiêu đề trượt lên từng dòng</li><li>Ảnh mở dần từ dưới lên</li><li>Đường kẻ tự vẽ ra</li></ul>
+    <div class="chips"><span>sang</span><span>tối giản</span><span>chữ là chính</span></div>
+    <button class="pick"><span class="lbl">Chọn phong cách này</span><span>→</span></button>
+  </div>
+  <div class="frame"><div class="bar"><i></i><i></i><i></i><span>hiulaptop.me</span></div>
+    <div class="mock s2"><div class="wrap">
+      <div class="top"><span>Hiulaptop — Lưu trữ</span><span>Số 01 · 2026</span><span>Việt Nam</span></div>
+      <div class="body">
+        <h3><span class="ln"><span>Những thứ</span></span><span class="ln"><span><em>tôi đã</em></span></span><span class="ln"><span>làm ra.</span></span></h3>
+        <div class="side"><div class="ph"></div><div class="cap">Fig. 1 — Hiếu, 2026</div>
+          <p>Một kho lưu trữ cá nhân. Không ngành nghề, không chức danh — chỉ là những gì đã làm.</p></div>
+      </div>
+      <div class="rule"></div>
+      <div class="foot"><span>ThinkAlgo — giáo dục lập trình thi đấu</span><span>→</span></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="stage" id="bento" data-name="Bento Grid">
+  <div class="info">
+    <span class="num mono">03 / 08</span>
+    <h2>Bento Grid</h2>
+    <p>Toàn bộ trang đầu là một lưới ô: lời chào, chân dung, việc đang làm, dự án, đồng hồ. Nhìn 3 giây là hiểu bạn là ai.</p>
+    <ul><li>Các ô bật ra lần lượt</li><li>Ô nhấc nhẹ lên khi rê chuột</li><li>Đồng hồ giờ Việt Nam chạy thật</li></ul>
+    <div class="chips"><span>gọn</span><span>nhiều thông tin</span><span>kiểu Apple</span></div>
+    <button class="pick"><span class="lbl">Chọn phong cách này</span><span>→</span></button>
+  </div>
+  <div class="frame"><div class="bar"><i></i><i></i><i></i><span>hiulaptop.me</span></div>
+    <div class="mock s3"><div class="grid">
+      <div class="t hello"><span class="lbl">xin chào 👋</span><h3>Tôi là Hiếu.<br>Tôi dựng mọi thứ.</h3><p>Lưu trữ cá nhân những gì đã làm.</p></div>
+      <div class="t por"><div class="ph"></div><span class="nm">Hiếu</span></div>
+      <div class="t now"><span class="lbl">hiện tại</span><div class="big"><span class="live"></span> ThinkAlgo</div></div>
+      <div class="t"><span class="lbl">giờ ở VN</span><div class="big clock" data-clock>--:--</div></div>
+      <div class="t proj"><span class="lbl">dự án nổi bật</span><div class="big">ThinkAlgo →</div><p style="color:#a1a1aa;font-size:13px">7 repo · LMS · OJ · agent học liệu</p></div>
+      <div class="t gh"><span class="lbl" style="position:absolute;top:18px;left:18px">github</span>↗</div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="stage" id="terminal" data-name="Terminal">
+  <div class="info">
+    <span class="num mono">04 / 08</span>
+    <h2>Terminal</h2>
+    <p>Trang chủ là một cửa sổ dòng lệnh: lệnh tự gõ ra rồi in kết quả. Rất hợp với dân lập trình thi đấu.</p>
+    <ul><li>Lệnh tự gõ từng ký tự</li><li>Hiệu ứng vạch quét kiểu màn hình CRT</li><li>Chữ phát sáng xanh</li></ul>
+    <div class="chips"><span>nerd</span><span>cá tính</span><span>lập trình</span></div>
+    <button class="pick"><span class="lbl">Chọn phong cách này</span><span>→</span></button>
+  </div>
+  <div class="frame"><div class="bar"><i></i><i></i><i></i><span>hieu@hiulaptop: ~</span></div>
+    <div class="mock s4"><div class="wrap">
+      <div class="out" data-type></div>
+      <aside><div class="ph"></div><div>portrait.jpg — 4:5</div>
+        <div class="box">STATUS <span style="color:#4ade80">● online</span><br>NOW &nbsp;&nbsp;&nbsp;ThinkAlgo</div></aside>
+    </div></div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="stage" id="swiss" data-name="Swiss Kinetic">
+  <div class="info">
+    <span class="num mono">05 / 08</span>
+    <h2>Swiss Kinetic</h2>
+    <p>Kiểu poster Thuỵ Sĩ: lưới chia ô cứng, chữ khổng lồ chạy ngang, chỉ dùng một màu đỏ cam để nhấn. Mạnh và ấn tượng.</p>
+    <ul><li>3 hàng chữ khổng lồ chạy ngược chiều nhau</li><li>Khung ảnh có viền xoay</li><li>Chữ viền rỗng xen chữ đặc</li></ul>
+    <div class="chips"><span>táo bạo</span><span>poster</span><span>chữ lớn</span></div>
+    <button class="pick"><span class="lbl">Chọn phong cách này</span><span>→</span></button>
+  </div>
+  <div class="frame"><div class="bar"><i></i><i></i><i></i><span>hiulaptop.me</span></div>
+    <div class="mock s5">
+      <div class="head"><div>Hiulaptop</div><div>Lưu trữ</div><div>Việt Nam</div><div>2026</div></div>
+      <div class="txt"><b>Hiếu.</b><br>Những gì tôi đã làm — sản phẩm, hệ thống, lớp học.</div>
+      <div class="sq"><div class="ph"></div></div>
+      <div class="rows">
+        <div class="row r1"><span>XIN CHÀO — TÔI LÀ HIẾU — XIN CHÀO — TÔI LÀ HIẾU —&nbsp;</span><span>XIN CHÀO — TÔI LÀ HIẾU — XIN CHÀO — TÔI LÀ HIẾU —&nbsp;</span></div>
+        <div class="row r2"><span>THINKALGO · LMS · OJ · AGENT ·&nbsp;</span><span>THINKALGO · LMS · OJ · AGENT ·&nbsp;</span></div>
+        <div class="row r3"><span>ĐÃ LÀM ✶ ĐANG LÀM ✶ SẼ LÀM ✶&nbsp;</span><span>ĐÃ LÀM ✶ ĐANG LÀM ✶ SẼ LÀM ✶&nbsp;</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="stage" id="synthwave" data-name="Synthwave">
+  <div class="info">
+    <span class="num mono">06 / 08</span>
+    <h2>Synthwave</h2>
+    <p>Hoài cổ thập niên 80: mặt trời sọc, sàn lưới neon chạy về phía trước, chữ phát sáng chớp tắt. Vui và nổi bật.</p>
+    <ul><li>Sàn lưới chuyển động liên tục</li><li>Neon chớp như bảng hiệu</li><li>Khung ảnh phát sáng</li></ul>
+    <div class="chips"><span>retro</span><span>neon</span><span>vui</span></div>
+    <button class="pick"><span class="lbl">Chọn phong cách này</span><span>→</span></button>
+  </div>
+  <div class="frame"><div class="bar"><i></i><i></i><i></i><span>hiulaptop.me</span></div>
+    <div class="mock s6">
+      <div class="sun"></div><div class="floor"></div><div class="ph"></div>
+      <h3>HIẾU.EXE</h3>
+      <div class="sub">LƯU TRỮ · NHỮNG GÌ ĐÃ LÀM</div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section class="stage" id="scrapbook" data-name="Scrapbook">
+  <div class="info">
+    <span class="num mono">07 / 08</span>
+    <h2>Scrapbook</h2>
+    <p>Như một cuốn sổ tay: ảnh polaroid dán băng keo, chữ viết tay, sticker. Gần gũi, rất "cá nhân" — hợp tinh thần lưu giữ kỷ niệm.</p>
+    <ul><li>Polaroid đung đưa</li><li>Sticker lắc lư</li><li>Thẻ dự án xoay thẳng khi rê chuột</li></ul>
+    <div class="chips"><span>ấm áp</span><span>cá nhân</span><span>thủ công</span></div>
+    <button class="pick"><span class="lbl">Chọn phong cách này</span><span>→</span></button>
+  </div>
+  <div class="frame"><div class="bar"><i></i><i></i><i></i><span>hiulaptop.me</span></div>
+    <div class="mock s7">
+      <div class="pol"><div class="tape"></div><div class="ph"></div><p>Hiếu, 2026 ♡</p></div>
+      <div class="stk k1">mới!</div><div class="stk k2">đang<br>làm</div>
+      <div class="note"><h3>Những thứ<br>tôi đã làm</h3><p>Một cuốn sổ lưu lại sản phẩm, hệ thống và những lớp học. Không cho ngành nào cả — cho chính mình.</p></div>
+      <div class="arrow">↙ xem cái này nè</div>
+      <div class="card"><b>ThinkAlgo</b><p style="font-size:13px;margin-top:6px;color:#c8d0e0">Startup giáo dục lập trình thi đấu · 7 repo tự dựng</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 -->
+<section class="stage" id="cinematic" data-name="Cinematic">
+  <div class="info">
+    <span class="num mono">08 / 08</span>
+    <h2>Cinematic</h2>
+    <p>Như cảnh mở đầu một bộ phim: ảnh chân dung tràn toàn màn hình, viền đen điện ảnh trượt vào, có hạt film và phụ đề.</p>
+    <ul><li>Ảnh zoom chậm và trôi nhẹ</li><li>Viền đen điện ảnh trượt vào</li><li>Hạt film và phụ đề hiện dần</li></ul>
+    <div class="chips"><span>điện ảnh</span><span>ảnh là chính</span><span>cảm xúc</span></div>
+    <button class="pick"><span class="lbl">Chọn phong cách này</span><span>→</span></button>
+  </div>
+  <div class="frame"><div class="bar"><i></i><i></i><i></i><span>hiulaptop.me</span></div>
+    <div class="mock s8">
+      <div class="ph"></div><div class="vig"></div><div class="grain"></div>
+      <div class="lb t"></div><div class="lb b"></div>
+      <div class="txt"><small>MỘT KHO LƯU TRỮ CỦA</small><h3>Hiếu.</h3></div>
+      <div class="subt">— “Tôi lưu lại những gì mình đã làm.” —</div>
+    </div>
+  </div>
+</section>
+
+<div class="dots" id="dots"></div>
+<div class="dock"><span id="choice">Chưa chọn phong cách nào</span><button id="copy" disabled>Sao chép</button></div>
+
+<script>
+(() => {
+  const stages = [...document.querySelectorAll('.stage')];
+  const dots = document.getElementById('dots'), thumbs = document.getElementById('thumbs');
+  const choiceEl = document.getElementById('choice'), copyBtn = document.getElementById('copy');
+
+  stages.forEach((s, i) => {
+    const d = document.createElement('a'); d.href = '#' + s.id; d.title = s.dataset.name; dots.appendChild(d);
+    const t = document.createElement('a'); t.href = '#' + s.id; t.textContent = `${String(i + 1).padStart(2, '0')} ${s.dataset.name}`; thumbs.appendChild(t);
+  });
+  const dotEls = [...dots.children];
+
+  // vào khung nhìn → chạy hiệu ứng
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      dotEls.forEach((d, i) => d.classList.toggle('on', stages[i] === e.target));
+      if (e.target.id === 'terminal') typeTerminal();
+    }
+  }), { threshold: 0.45 });
+  stages.forEach((s) => io.observe(s));
+
+  // chọn
+  let picked = null;
+  try { picked = localStorage.getItem('hiu-style'); } catch (e) {}
+  const render = () => {
+    stages.forEach((s, i) => { const on = s.dataset.name === picked; s.classList.toggle('chosen', on); dotEls[i].classList.toggle('picked', on); });
+    choiceEl.innerHTML = picked ? `Bạn chọn: <b>${picked}</b>` : 'Chưa chọn phong cách nào';
+    copyBtn.disabled = !picked;
+  };
+  stages.forEach((s) => s.querySelector('.pick').addEventListener('click', () => {
+    picked = picked === s.dataset.name ? null : s.dataset.name;
+    try { picked ? localStorage.setItem('hiu-style', picked) : localStorage.removeItem('hiu-style'); } catch (e) {}
+    render();
+  }));
+  copyBtn.addEventListener('click', async () => {
+    const txt = `Tôi chọn phong cách: ${picked}`;
+    try { await navigator.clipboard.writeText(txt); copyBtn.textContent = 'Đã chép ✓'; }
+    catch (e) { prompt('Sao chép dòng này:', txt); }
+    setTimeout(() => (copyBtn.textContent = 'Sao chép'), 1500);
+  });
+  render();
+
+  // phím ↑ ↓
+  addEventListener('keydown', (e) => {
+    if (!['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp'].includes(e.key)) return;
+    e.preventDefault();
+    const all = [document.getElementById('top'), ...stages];
+    const cur = all.findIndex((s) => Math.abs(s.getBoundingClientRect().top) < innerHeight / 2);
+    const next = all[Math.max(0, Math.min(all.length - 1, cur + (/Down/.test(e.key) ? 1 : -1)))];
+    next.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // đồng hồ VN
+  const clock = document.querySelector('[data-clock]');
+  const tick = () => clock.textContent = new Date().toLocaleTimeString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  tick(); setInterval(tick, 1000);
+
+  // terminal gõ chữ
+  let typed = false;
+  function typeTerminal() {
+    if (typed) return; typed = true;
+    const out = document.querySelector('[data-type]');
+    const script = [
+      ['cmd', 'whoami'], ['out', 'Hiếu — <span class="dim">người dựng mọi thứ, không theo ngành nào</span>'],
+      ['cmd', 'cat now.txt'], ['out', '<span class="y">ThinkAlgo</span> — startup giáo dục lập trình thi đấu'],
+      ['cmd', 'ls projects/'], ['out', 'thinkalgo/  <span class="dim">(lms, oj, nexus, labs, station, coordinator, odoo)</span>\n<span class="dim">... sẽ còn thêm</span>'],
+      ['cmd', 'open github'], ['out', '→ github.com/Hiulaptop'],
+    ];
+    let html = '', li = 0;
+    const cursor = '<span class="cur"></span>';
+    const next = () => {
+      if (li >= script.length) { out.innerHTML = html + '<span class="p">$</span> ' + cursor; return; }
+      const [kind, text] = script[li++];
+      if (kind === 'out') { html += text + '\n\n'; out.innerHTML = html + cursor; setTimeout(next, 350); return; }
+      let c = 0; const prefix = '<span class="p">hieu@hiulaptop ~ $</span> ';
+      const step = () => {
+        out.innerHTML = html + prefix + text.slice(0, ++c) + cursor;
+        if (c < text.length) setTimeout(step, 55 + Math.random() * 60);
+        else { html += prefix + text + '\n'; setTimeout(next, 300); }
+      };
+      step();
+    };
+    next();
+  }
+})();
+</script>
+</body>
+</html>
